@@ -49,13 +49,13 @@ if ( ! class_exists( 'F_LoggedIn' ) ) {
     // Only execute if not admin side
     if ( ! is_admin() ) {
         require dirname( __FILE__ ) . '/includes/class-f-loggedin.php';
-        $admin = new F_LoggedIn_Admin();
+        $admin = new F_LoggedIn();
     }
         
     // Only execute if admin side
     if ( is_admin() ) {
         require dirname( __FILE__ ) . '/includes/class-f-loggedin-admin.php';
-        $admin = new F_LoggedIn();
+        $admin = new F_LoggedIn_Admin();
     }
 }
 
