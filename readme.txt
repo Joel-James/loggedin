@@ -2,7 +2,7 @@
 Contributors: joelcj91,foxe
 Tags: active logins, loggedin, login, logout, limit active logins, login limit, concurrent logins
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XUVWY8HUBUXY4
-Requires at least: 3.0
+Requires at least: 4.0
 Tested up to: 4.5.3
 Stable tag: 1.0.0
 License: GPLv2 or later

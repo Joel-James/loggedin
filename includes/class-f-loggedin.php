@@ -101,7 +101,7 @@ class F_LoggedIn {
     private function bypass( $user_id ) {
         
         // User loggedin_bypass() filter with $user_id parameter
-        return (bool) apply_filters( 'loggedin_bypass', true, $user_id );
+        return (bool) apply_filters( 'loggedin_bypass', false, $user_id );
     }
 
     /**
