@@ -100,6 +100,7 @@ function f_loggedin_bypass_roles( $prevent, $user_id ) {
     return ! empty( array_intersect( $roles, $whitelist ) );
 
 }
+
 add_filter( 'loggedin_bypass', 'f_loggedin_bypass_roles', 10, 2 );
 </pre>
 
