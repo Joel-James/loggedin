@@ -39,10 +39,6 @@ Even if the user is closing the browser without logging out, their login session
 
 Bug reports for are always welcome. [Report here](https://thefoxe.com/bug-report/).
 
-**WordPress Post Revision - More Details**
-
-If you are confused with what is post revision, [refer this page](https://codex.wordpress.org/Revisions) to know more about it.
-
 
 == Installation ==
 
