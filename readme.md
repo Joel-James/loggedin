@@ -67,7 +67,7 @@ function f_loggedin_bypass_roles( $prevent, $user_id ) {
 
     $roles = ! empty( $user->roles ) ? $user->roles : array();
 
-    return ! empty( array_intersect( $roles, $whitelist ) );
+    return ! empty( array_intersect( $roles, $allowed_roles ) );
 
 }
 
