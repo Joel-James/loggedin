@@ -15,7 +15,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @license    http://www.gnu.org/licenses/ GNU General Public License
  * @link       https://thefoxe.com/products/loggedin
  */
-class Foxe_LoggedIn_Admin {
+class F_LoggedIn_Admin {
 
     /**
      * Initialize the class and set its properties.
@@ -48,7 +48,7 @@ class Foxe_LoggedIn_Admin {
 
         add_settings_field(
             'loggedin_label',
-            '<label for="dpr">' . __( 'Maximum Active Logins', FLOGGEDIN_DOMAIN ) . '</label>',
+            '<label for="dpr">' . __( 'Maximum Active Logins', F_LOGGEDIN_DOMAIN ) . '</label>',
             array( &$this, 'fields' ),
             'general'
         );
@@ -66,12 +66,11 @@ class Foxe_LoggedIn_Admin {
     public function fields() {
         
         // get settings value
-        $value = get_option( 'loggedin_maximum', 5 );
-
+        $value = get_option( 'loggedin_maximum', 3 );
         echo '<input type="number" name="loggedin_maximum" min="1" value="' . intval( $value ) . '" />';
-        echo '<p class="description">' . __( 'Set the maximum no. of active logins a user account can have.', FLOGGEDIN_DOMAIN ) . '</p>';
-        echo '<p class="description">' . __( 'If this limit reached, next login request will be failed and user will have to logout from one device to continue.', FLOGGEDIN_DOMAIN ) . '</p>';
-        echo '<p class="description"><strong>' . __( 'Note: ', FLOGGEDIN_DOMAIN ) . '</strong>' . __( 'Count will be reduced only if user manually logged out.', FLOGGEDIN_DOMAIN ) . '</p>';
+        echo '<p class="description">' . __( 'Set the maximum no. of active logins a user account can have.', F_LOGGEDIN_DOMAIN ) . '</p>';
+        echo '<p class="description">' . __( 'If this limit reached, next login request will be failed and user will have to logout from one device to continue.', F_LOGGEDIN_DOMAIN ) . '</p>';
+        echo '<p class="description"><strong>' . __( 'Note: ', F_LOGGEDIN_DOMAIN ) . '</strong>' . __( 'Even if the browser is closed, login session may exist.', F_LOGGEDIN_DOMAIN ) . '</p>';
     }
 
 }
