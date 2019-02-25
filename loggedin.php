@@ -31,7 +31,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! class_exists( 'F_LoggedIn' ) ) {
-    
+
     // Constants array
     $constants = array(
         'F_LOGGEDIN_NAME' => 'loggedin',
@@ -45,13 +45,15 @@ if ( ! class_exists( 'F_LoggedIn' ) ) {
             define( $constant, $value );
         }
     }
-        
+    
+    load_plugin_textdomain( 'loggedin', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
     // Only execute if not admin side
     if ( ! is_admin() ) {
         require dirname( __FILE__ ) . '/includes/class-f-loggedin.php';
         $admin = new F_LoggedIn();
     }
-        
+
     // Only execute if admin side
     if ( is_admin() ) {
         require dirname( __FILE__ ) . '/includes/class-f-loggedin-admin.php';
@@ -59,4 +61,4 @@ if ( ! class_exists( 'F_LoggedIn' ) ) {
     }
 }
 
-//*** Thank you for your interest in LoggedIn - Developed and managed by Joel James ***// 
+//*** Thank you for your interest in LoggedIn - Developed and managed by Joel James ***//
