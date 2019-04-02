@@ -19,12 +19,12 @@ class F_LoggedIn_Admin {
 
     /**
      * Initialize the class and set its properties.
-     * 
+     *
      * We register all our admin hooks here.
      *
      * @since  1.0.0
      * @access public
-     * 
+     *
      * @return void
      */
     public function __construct() {
@@ -39,7 +39,7 @@ class F_LoggedIn_Admin {
      * @access public
      * @uses   register_setting()   To register new setting.
      * @uses   add_settings_field() To add new field to for the setting.
-     * 
+     *
      * @return void
      */
     public function options_page() {
@@ -60,11 +60,11 @@ class F_LoggedIn_Admin {
      * @since  1.0.0
      * @access public
      * @uses   get_option() To get the option value.
-     * 
+     *
      * @return void
      */
     public function fields() {
-        
+
         // get settings value
         $value = get_option( 'loggedin_maximum', 3 );
         echo '<input type="number" name="loggedin_maximum" min="1" value="' . intval( $value ) . '" />';
