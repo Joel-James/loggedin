@@ -5,6 +5,7 @@ Donate link: https://paypal.me/JoelCJ
 Requires at least: 4.0
 Tested up to: 5.2
 Stable tag: 1.1.0
+Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +20,7 @@ By default in WordPress users can login using one account from **unlimited** dev
 >
 > - **Set maximum no. of active logins for a user**.<br />
 > - **Block new logins to the same account, if maximum active logins found.**<br />
+> - **Force logout users from admin.**<br />
 > - Prevent users from sharing their account.<br />
 > - Useful for membership sites (for others too).<br />
 > - No complex settings. Just one optional field to set the limit.<br />
@@ -51,15 +53,24 @@ If you would like to have an additional feature for this plugin, [let me know](h
 
 == Frequently Asked Questions ==
 
-= How can I set the limit, and where? =
+= How can I set the limit, and where? 🤔 =
 
 This plugin does not have a seperate settings page. But we have one configural settings to let you set the login limit.
 
 1. Go to `Settings` page in admin dashboard.
-2. Scroll down to see the option `Maximum Active Logins`.
-3. Set the maximum number of active logins a user can have.
+2. Scroll down to see the section `🔐 Loggedin`.
+3. Set the maximum number of active logins a user can have in `Maximum Active Logins` option.
 
-= Can I bypass this limit for certain users or roles? =
+= How can I forcefully logout a user from all devices? 🤔 =
+
+You can forcefully logout a user from all the devices he has logged into. Get his WordPress user ID and,
+
+1. Go to `Settings` page in admin dashboard.
+2. Scroll down to see the section `🔐 Loggedin`.
+3. Enter user ID of the user you would like to logout.
+4. Click `Force Logout`.
+
+= Can I bypass this limit for certain users or roles? 🤔 =
 
 Yes, of course. But this time you are going to add few lines of code. Don't worry. Just copy+paste this code in your theme's `functions.php` file or in custom plugin:
 
@@ -98,7 +109,7 @@ add_filter( 'loggedin_bypass', 'f_loggedin_bypass_roles', 10, 2 );
 
 == Other Notes ==
 
-= Bug Reports =
+= 🐛 Bug Reports =
 
 Bug reports are always welcome - [report here](https://duckdev.com/support/).
 
@@ -112,23 +123,39 @@ Bug reports are always welcome - [report here](https://duckdev.com/support/).
 
 = 1.1.0 (06/06/2019) =
 
-- Code improvements.
-- Added cleanup on plugin uninstall.
-- Added review notice.
+**📦 New**
+
+* Added ability yo force logout users.
+* Added cleanup on plugin uninstall.
+* Added review notice.
+
+**👌 Improvements**
+
+* Code improvement
 
 = 1.0.1 (02/07/2016) =
 
-- Fixing misspelled variable.
+**🐛 Bug Fixes**
+
+* Fixing misspelled variable.
 
 = 1.0.0 (16/06/2016) =
 
-- Initial version release.
+**📦 New**
+
+* Initial version release.
 
 
 == Upgrade Notice ==
 
 = 1.1.0 (06/06/2019) =
 
-- Code improvements.
-- Added cleanup on plugin uninstall.
-- Added review notice.
+**📦 New**
+
+* Added ability yo force logout users.
+* Added cleanup on plugin uninstall.
+* Added review notice.
+
+**👌 Improvements**
+
+* Code improvement

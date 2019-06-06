@@ -4,9 +4,10 @@
 Light weight WordPress plugin to limit number of active logins from an account. Set maximum number of concurrent logins a user can have from multiple places.
 
 **Contributors:** [Joel James](https://profiles.wordpress.org/joelcj91)  
-**Requires at least:** 4.1  
-**Tested up to:** 4.5.3  
-**Stable tag:** 1.0.0  
+**Requires at least:** 4.0<br />
+**Tested up to:** 5.2<br />
+**Stable tag:** 1.1.0<br />
+**Requires PHP:** 5.6<br />
 **License:** [GPLv2+](https://www.gnu.org/licenses/gpl-2.0.html)  
 
 
@@ -18,6 +19,7 @@ By default in WordPress users can login using one account from **unlimited** dev
 >
 > - **Set maximum no. of active logins for a user**.<br />
 > - **Block new logins to the same account, if maximum active logins found.**<br />
+> - **Force logout users from admin.**<br />
 > - Prevent users from sharing their account.<br />
 > - Useful for membership sites (for others too).<br />
 > - No complex settings. Just one optional field to set the limit.<br />
@@ -32,14 +34,22 @@ By default in WordPress users can login using one account from **unlimited** dev
 
 ## Frequently Asked Questions ##
 
-### How can I set the limit, and where? ###
+### How can I set the limit, and where? 🤔 ###
 This plugin does not have a seperate settings page. But we have one configural settings to let you set the login limit.
 
 1. Go to `Settings` page in admin dashboard.
-2. Scroll down to see the option `Maximum Active Logins`.
-3. Set the maximum number of active logins a user can have.
+2. Scroll down to see the section `🔐 Loggedin`.
+3. Set the maximum number of active logins a user can have in `Maximum Active Logins` option.
 
-### Can I bypass this limit for certain users or roles? ###
+### How can I forcefully logout a user from all devices? 🤔 ###
+You can forcefully logout a user from all the devices he has logged into. Get his WordPress user ID and,
+
+1. Go to `Settings` page in admin dashboard.
+2. Scroll down to see the section `🔐 Loggedin`.
+3. Enter user ID of the user you would like to logout.
+4. Click `Force Logout`.
+
+### Can I bypass this limit for certain users or roles? 🤔 ###
 Yes, of course. But this time you are going to add few lines of code. Don't worry. Just copy+paste this code in your theme's `functions.php` file or in custom plugin:
 
 ```php
