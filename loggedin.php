@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name:     LoggedIn - Limit Active Logins
- * Plugin URI:      https://wordpress.org/plugins/loggedin/
+ * Plugin Name:     Loggedin - Limit Active Logins
+ * Plugin URI:      https://duckdev.com/products/loggedin-limit-active-logins/
  * Description:     Light weight plugin to limit number of active logins from an account. Set maximum number of concurrent logins a user can have from multiple places.
- * Version:         1.0.0
+ * Version:         1.1.0
  * Author:          Joel James
- * Author URI:      https://thefoxe.com/
+ * Author URI:      https://duckdev.com/
  * Donate link:     https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XUVWY8HUBUXY4
  * License:         GPL-2.0+
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
@@ -26,39 +26,28 @@
  * along with LoggedIn. If not, see <http://www.gnu.org/licenses/>.
  */
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-    die( 'Damn it.! Dude you are looking for what?' );
-}
+defined( 'WPINC' ) || die( 'Well, get lost.' );
 
-if ( ! class_exists( 'F_LoggedIn' ) ) {
+// Only when class not already exist.
+if ( ! class_exists( 'Loggedin' ) ) {
+	// Load text domain.
+	load_plugin_textdomain(
+		'loggedin',
+		false,
+		dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+	);
 
-    // Constants array
-    $constants = array(
-        'F_LOGGEDIN_NAME' => 'loggedin',
-        'F_LOGGEDIN_DOMAIN' => 'loggedin',
-        'F_LOGGEDIN_VERSION' => '1.0.0',
-    );
+	// Only execute if not admin side.
+	if ( ! is_admin() ) {
+		require dirname( __FILE__ ) . '/includes/class-loggedin.php';
+		new Loggedin();
+	}
 
-    foreach ( $constants as $constant => $value ) {
-        // Set constants if not set already
-        if ( ! defined( $constant ) ) {
-            define( $constant, $value );
-        }
-    }
-    
-    load_plugin_textdomain( 'loggedin', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-
-    // Only execute if not admin side
-    if ( ! is_admin() ) {
-        require dirname( __FILE__ ) . '/includes/class-f-loggedin.php';
-        $admin = new F_LoggedIn();
-    }
-
-    // Only execute if admin side
-    if ( is_admin() ) {
-        require dirname( __FILE__ ) . '/includes/class-f-loggedin-admin.php';
-        $admin = new F_LoggedIn_Admin();
-    }
+	// Only execute if admin side
+	if ( is_admin() ) {
+		require dirname( __FILE__ ) . '/includes/class-loggedin-admin.php';
+		new Loggedin_Admin();
+	}
 }
 
 //*** Thank you for your interest in LoggedIn - Developed and managed by Joel James ***//

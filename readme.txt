@@ -1,10 +1,10 @@
 === Loggedin - Limit Active Logins ===
-Contributors: joelcj91,foxe
+Contributors: joelcj91,duckdev
 Tags: active logins, loggedin, login, logout, limit active logins, login limit, concurrent logins
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XUVWY8HUBUXY4
+Donate link: https://paypal.me/JoelCJ
 Requires at least: 4.0
-Tested up to: 4.5.3
-Stable tag: 1.0.0
+Tested up to: 5.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ Light weight plugin to limit number of active logins from an account. Set maximu
 By default in WordPress users can login using one account from **unlimited** devices/browsers at a time. This is not good for everyone, seriously! With this plugin you can easily set a limit for no. of active logins a user can have.
 
 
-> #### LoggedIn - Features and Advantages
+> #### Loggedin 🔒 Features and Advantages
 >
 > - **Set maximum no. of active logins for a user**.<br />
 > - **Block new logins to the same account, if maximum active logins found.**<br />
@@ -31,14 +31,9 @@ By default in WordPress users can login using one account from **unlimited** dev
 
 Please contribute to the plugin development in [GitHub](https://github.com/joel-james/LoggedIn).
 
-**Important Notice**
+**🔐 Important Notice**
 
 Even if the user is closing the browser without logging out, their login session exists for period of time. So this will also considered as an active login.
-
-**Bug Reports**
-
-Bug reports for are always welcome. [Report here](https://thefoxe.com/bug-report/).
-
 
 == Installation ==
 
@@ -52,7 +47,7 @@ Bug reports for are always welcome. [Report here](https://thefoxe.com/bug-report
 
 
 = Missing something? =
-If you would like to have an additional feature for this plugin, [let me know](http://thefoxe.com/support/)
+If you would like to have an additional feature for this plugin, [let me know](https://duckdev.com/support/)
 
 == Frequently Asked Questions ==
 
@@ -105,7 +100,7 @@ add_filter( 'loggedin_bypass', 'f_loggedin_bypass_roles', 10, 2 );
 
 = Bug Reports =
 
-Bug reports are always welcome. [Report here](https://thefoxe.com/bug-report/).
+Bug reports are always welcome - [report here](https://duckdev.com/support/).
 
 
 == Screenshots ==
@@ -115,6 +110,16 @@ Bug reports are always welcome. [Report here](https://thefoxe.com/bug-report/).
 
 == Changelog ==
 
+= 1.1.0 (06/06/2019) =
+
+- Code improvements.
+- Added cleanup on plugin uninstall.
+- Added review notice.
+
+= 1.0.1 (02/07/2016) =
+
+- Fixing misspelled variable.
+
 = 1.0.0 (16/06/2016) =
 
 - Initial version release.
@@ -122,6 +127,8 @@ Bug reports are always welcome. [Report here](https://thefoxe.com/bug-report/).
 
 == Upgrade Notice ==
 
-= 1.0.0 (16/06/2016) =
+= 1.1.0 (06/06/2019) =
 
-- Initial version release.
+- Code improvements.
+- Added cleanup on plugin uninstall.
+- Added review notice.
