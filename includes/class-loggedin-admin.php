@@ -28,10 +28,56 @@ class Loggedin_Admin {
 	public function __construct() {
 		// Set options page.
 		add_action( 'admin_init', array( $this, 'options_page' ) );
+		// Set options page.
+		add_action( 'admin_init', array( $this, 'force_logout' ) );
 
 		// Show review request.
 		add_action( 'admin_notices', array( $this, 'review_notice' ) );
 		add_action( 'admin_init', array( $this, 'review_action' ) );
+	}
+
+	/**
+	 * Process the force logout action.
+	 *
+	 * This will force logout the user from all devices.
+	 *
+	 * @since  1.1.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function force_logout() {
+		// If force logout submit.
+		if ( isset( $_REQUEST['loggedin_logout'] ) && isset( $_REQUEST['loggedin_user'] ) ) {
+			// Security check.
+			check_admin_referer( 'general-options' );
+
+			// Get user.
+			$user = get_userdata( (int) $_REQUEST['loggedin_user'] );
+
+			if ( $user ) {
+				// Sessions token instance.
+				$manager = WP_Session_Tokens::get_instance( $user->ID );
+
+				// Destroy all sessions.
+				$manager->destroy_all();
+
+				// Add success message.
+				add_settings_error(
+					'general',
+					'settings_updated', // Override the settings update message.
+					sprintf( __( 'User %s forcefully logged out from all devices.', 'loggedin' ), $user->user_login ),
+					'updated'
+				);
+			} else {
+				// Add success message.
+				add_settings_error(
+					'general',
+					'settings_updated', // Override the settings update message.
+					sprintf( __( 'Invalid user ID: %d', 'loggedin' ), $_REQUEST['loggedin_user'] )
+				);
+			}
+		}
 	}
 
 	/**
@@ -45,16 +91,53 @@ class Loggedin_Admin {
 	 * @return void
 	 */
 	public function options_page() {
+		// Add new settings section.
+		add_settings_section(
+			'loggedin_settings',
+			'🔐 Loggedin Settings',
+			'',
+			'general'
+		);
+
 		// Register settings.
 		register_setting( 'general', 'loggedin_maximum' );
 
-		// Add new setting filed.
+		// Add new setting filed to set the limit.
 		add_settings_field(
-			'loggedin_label',
-			'<label for="dpr">' . __( 'Maximum Active Logins', 'loggedin' ) . '</label>',
-			array( &$this, 'fields' ),
-			'general'
+			'loggedin_maximum',
+			'<label for="loggedin_maximum">' . __( 'Maximum Active Logins', 'loggedin' ) . '</label>',
+			array( &$this, 'loggedin_maximum' ),
+			'general',
+			'loggedin_settings'
 		);
+
+		// Add new setting field for force logout.
+		add_settings_field(
+			'loggedin_logout',
+			'<label for="loggedin_logout">' . __( 'Force Logout', 'loggedin' ) . '</label>',
+			array( &$this, 'loggedin_logout' ),
+			'general',
+			'loggedin_settings'
+		);
+	}
+
+	/**
+	 * Create new options field to show the.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @uses   get_option() To get the option value.
+	 *
+	 * @return void
+	 */
+	public function loggedin_maximum() {
+		// Get settings value.
+		$value = get_option( 'loggedin_maximum', 3 );
+
+		echo '<p><input type="number" name="loggedin_maximum" id="loggedin_maximum" min="1" value="' . intval( $value ) . '" placeholder="' . __( 'Enter the limit in number', 'loggedin' ) . '" /></p>';
+		echo '<p class="description">' . __( 'Set the maximum no. of active logins a user account can have.', 'loggedin' ) . '</p>';
+		echo '<p class="description">' . __( 'If this limit reached, next login request will be failed and user will have to logout from one device to continue.', 'loggedin' ) . '</p>';
+		echo '<p class="description"><strong>' . __( 'Note: ', 'loggedin' ) . '</strong>' . __( 'Even if the browser is closed, login session may exist.', 'loggedin' ) . '</p>';
 	}
 
 	/**
@@ -66,14 +149,10 @@ class Loggedin_Admin {
 	 *
 	 * @return void
 	 */
-	public function fields() {
-		// Get settings value.
-		$value = get_option( 'loggedin_maximum', 3 );
-
-		echo '<input type="number" name="loggedin_maximum" min="1" value="' . intval( $value ) . '" />';
-		echo '<p class="description">' . __( 'Set the maximum no. of active logins a user account can have.', 'loggedin' ) . '</p>';
-		echo '<p class="description">' . __( 'If this limit reached, next login request will be failed and user will have to logout from one device to continue.', 'loggedin' ) . '</p>';
-		echo '<p class="description"><strong>' . __( 'Note: ', 'loggedin' ) . '</strong>' . __( 'Even if the browser is closed, login session may exist.', 'loggedin' ) . '</p>';
+	public function loggedin_logout() {
+		echo '<input type="number" name="loggedin_user" min="1" placeholder="' . __( 'Enter user ID', 'loggedin' ) . '" />';
+		echo '<input type="submit" name="loggedin_logout" id="loggedin_logout" class="button" value="Force Logout">';
+		echo '<p class="description">' . __( 'If you would like to force logout a user from all devices, enter the user ID.', 'loggedin' ) . '</p>';
 	}
 
 	/**
