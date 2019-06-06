@@ -28,6 +28,10 @@ class Loggedin_Admin {
 	public function __construct() {
 		// Set options page.
 		add_action( 'admin_init', array( $this, 'options_page' ) );
+
+		// Show review request.
+		add_action( 'admin_notices', array( $this, 'review_notice' ) );
+		add_action( 'admin_init', array( $this, 'review_action' ) );
 	}
 
 	/**
@@ -93,39 +97,39 @@ class Loggedin_Admin {
 			}
 
 			// Get the notice time.
-			$notice_time = get_option( 'i4t3_review_notice' );
+			$notice_time = get_option( 'loggedin_rating_notice' );
 
 			// If not set, set now and bail.
 			if ( ! $notice_time ) {
 				// Set to next week.
-				return add_option( 'i4t3_review_notice', time() + 604800 );
+				return add_option( 'loggedin_rating_notice', time() + 604800 );
 			}
 
 			// Current logged in user.
 			$current_user = wp_get_current_user();
 
 			// Did the current user already dismiss?.
-			$dismissed = get_user_meta( $current_user->ID, 'i4t3_review_notice_dismissed', true );
+			$dismissed = get_user_meta( $current_user->ID, 'loggedin_rating_notice_dismissed', true );
 
 			// Continue only when allowed.
 			if ( (int) $notice_time <= time() && ! $dismissed ) {
 				?>
                 <div class="notice notice-success">
-                    <p><?php printf( __( 'Hey %1$s, I noticed you\'ve been using %2$s404 to 301%3$s for more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.', '404-to-301' ),
-							empty( $current_user->display_name ) ? __( 'there', '404-to-301' ) : ucwords( $current_user->display_name ),
+                    <p><?php printf( __( 'Hey %1$s, I noticed you\'ve been using %2$sLoggedin%3$s plugin for more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.', 'loggedin' ),
+							empty( $current_user->display_name ) ? __( 'there', 'loggedin' ) : ucwords( $current_user->display_name ),
 							'<strong>',
 							'</strong>'
 						); ?>
                     </p>
                     <p>
-                        <a href="https://wordpress.org/support/plugin/404-to-301/reviews/#new-post"
-                           target="_blank"><?php esc_html_e( 'Ok, you deserve it', '404-to-301' ); ?></a>
+                        <a href="https://wordpress.org/support/plugin/loggedin/reviews/#new-post"
+                           target="_blank"><?php esc_html_e( 'Ok, you deserve it', 'loggedin' ); ?></a>
                     </p>
                     <p>
-                        <a href="<?php echo add_query_arg( 'jj4t3_rating', 'later' ); // later. ?>"><?php esc_html_e( 'Nope, maybe later', '404-to-301' ); ?></a>
+                        <a href="<?php echo add_query_arg( 'loggedin_rating', 'later' ); // later. ?>"><?php esc_html_e( 'Nope, maybe later', 'loggedin' ); ?></a>
                     </p>
                     <p>
-                        <a href="<?php echo add_query_arg( 'jj4t3_rating', 'dismiss' ); // dismiss link. ?>"><?php esc_html_e( 'I already did', '404-to-301' ); ?></a>
+                        <a href="<?php echo add_query_arg( 'loggedin_rating', 'dismiss' ); // dismiss link. ?>"><?php esc_html_e( 'I already did', 'loggedin' ); ?></a>
                     </p>
                 </div>
 				<?php
