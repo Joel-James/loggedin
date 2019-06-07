@@ -49,7 +49,18 @@ class Loggedin {
 
 		// Check if limit exceed.
 		if ( $this->reached_limit( $user->ID ) ) {
-			return new WP_Error( 'loggedin_reached_limit', $this->error_message() );
+			// Get the logic.
+			$logic = $value = get_option( 'loggedin_logic', 'allow' );
+
+			// Do not allow new logins.
+			if ( 'block' === $logic ) {
+				return new WP_Error( 'loggedin_reached_limit', $this->error_message() );
+			} else {
+				// Sessions token instance.
+				$manager = WP_Session_Tokens::get_instance( $user->ID );
+				// Destroy all others.
+				$manager->destroy_all();
+			}
 		}
 
 		return $user;

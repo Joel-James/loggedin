@@ -3,7 +3,7 @@
  * Plugin Name:     Loggedin - Limit Active Logins
  * Plugin URI:      https://duckdev.com/products/loggedin-limit-active-logins/
  * Description:     Light weight plugin to limit number of active logins from an account. Set maximum number of concurrent logins a user can have from multiple places.
- * Version:         1.1.0
+ * Version:         1.2.0
  * Author:          Joel James
  * Author URI:      https://duckdev.com/
  * Donate link:     https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XUVWY8HUBUXY4

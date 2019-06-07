@@ -4,7 +4,7 @@ Tags: active logins, loggedin, login, logout, limit active logins, login limit, 
 Donate link: https://paypal.me/JoelCJ
 Requires at least: 4.0
 Tested up to: 5.2
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -19,7 +19,8 @@ By default in WordPress users can login using one account from **unlimited** dev
 > #### Loggedin 🔒 Features and Advantages
 >
 > - **Set maximum no. of active logins for a user**.<br />
-> - **Block new logins to the same account, if maximum active logins found.**<br />
+> - **Block new logins when the login limit is reached.**<br />
+> - **Allow new logins while logging out from other devices when the limit is reached.**<br />
 > - **Force logout users from admin.**<br />
 > - Prevent users from sharing their account.<br />
 > - Useful for membership sites (for others too).<br />
@@ -61,6 +62,38 @@ This plugin does not have a seperate settings page. But we have one configural s
 2. Scroll down to see the section `🔐 Loggedin`.
 3. Set the maximum number of active logins a user can have in `Maximum Active Logins` option.
 
+= Can I somehow allow new logins when the limit is reached? 🤔 =
+
+You can forcefully logout the user from other devices and allow new login.
+
+1. Go to `Settings` page in admin dashboard.
+2. Scroll down to see the section `🔐 Loggedin`.
+3. Select the `Login Logic` as `Allow`.
+
+= Can I block the new logins when the limit is reached? 🤔 =
+
+You block the new logins when the user is logged in from maximum no. of devices according to the limit you set.
+
+1. Go to `Settings` page in admin dashboard.
+2. Scroll down to see the section `🔐 Loggedin`.
+3. Select the `Login Logic` as `Block`.
+4. Now user will have to wait for the other login sessions to expire before login from new device.
+
+= How long a login session exist? How long the user needs to wait for new login? 🤔 =
+
+That depends. If the “Remember Me” box is checked while login, WordPress will keep the user logged in for 14 days by default. If “Remember Me” is not checked, 2 days will be the active login session time.
+
+You can change that period using, auth_cookie_expiration filter.
+
+<pre lang="php">
+function loggedin_auth_cookie_expiration( $expire ) {
+    // Allow for a month.
+    return MONTH_IN_SECONDS;
+}
+
+add_filter( 'auth_cookie_expiration', 'loggedin_auth_cookie_expiration' );
+</pre>
+
 = How can I forcefully logout a user from all devices? 🤔 =
 
 You can forcefully logout a user from all the devices he has logged into. Get his WordPress user ID and,
@@ -75,22 +108,21 @@ You can forcefully logout a user from all the devices he has logged into. Get hi
 Yes, of course. But this time you are going to add few lines of code. Don't worry. Just copy+paste this code in your theme's `functions.php` file or in custom plugin:
 
 <pre lang="php">
-function f_loggedin_bypass_users( $bypass, $user_id ) {
+function loggedin_bypass_users( $bypass, $user_id ) {
     
     // Enter the user IDs to bypass.
     $allowed_users = array( 1, 2, 3, 4, 5 );
 
     return in_array( $user_id, $allowed_users );
-
 }
 
-add_filter( 'loggedin_bypass', 'f_loggedin_bypass_users', 10, 2 );
+add_filter( 'loggedin_bypass', 'loggedin_bypass_users', 10, 2 );
 </pre>
 
 Or if you want to bypass this for certain roles:
 
 <pre lang="php">
-function f_loggedin_bypass_roles( $prevent, $user_id ) {
+function loggedin_bypass_roles( $prevent, $user_id ) {
 
     // Array of roles to bypass.
     $allowed_roles = array( 'administrator', 'editor' );
@@ -100,10 +132,9 @@ function f_loggedin_bypass_roles( $prevent, $user_id ) {
     $roles = ! empty( $user->roles ) ? $user->roles : array();
 
     return ! empty( array_intersect( $roles, $whitelist ) );
-
 }
 
-add_filter( 'loggedin_bypass', 'f_loggedin_bypass_roles', 10, 2 );
+add_filter( 'loggedin_bypass', 'loggedin_bypass_roles', 10, 2 );
 </pre>
 
 
@@ -121,11 +152,17 @@ Bug reports are always welcome - [report here](https://duckdev.com/support/).
 
 == Changelog ==
 
+= 1.2.0 (07/06/2019) =
+
+**📦 New**
+
+* Added ability to choose login logic.
+
 = 1.1.0 (06/06/2019) =
 
 **📦 New**
 
-* Added ability yo force logout users.
+* Added ability to force logout users.
 * Added cleanup on plugin uninstall.
 * Added review notice.
 
@@ -148,14 +185,8 @@ Bug reports are always welcome - [report here](https://duckdev.com/support/).
 
 == Upgrade Notice ==
 
-= 1.1.0 (06/06/2019) =
+= 1.2.0 (07/06/2019) =
 
 **📦 New**
 
-* Added ability yo force logout users.
-* Added cleanup on plugin uninstall.
-* Added review notice.
-
-**👌 Improvements**
-
-* Code improvement
+* Added ability to choose login logic.

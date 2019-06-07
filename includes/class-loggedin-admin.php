@@ -99,14 +99,25 @@ class Loggedin_Admin {
 			'general'
 		);
 
-		// Register settings.
+		// Register limit settings.
 		register_setting( 'general', 'loggedin_maximum' );
+		// Register logic settings.
+		register_setting( 'general', 'loggedin_logic' );
 
 		// Add new setting filed to set the limit.
 		add_settings_field(
 			'loggedin_maximum',
 			'<label for="loggedin_maximum">' . __( 'Maximum Active Logins', 'loggedin' ) . '</label>',
 			array( &$this, 'loggedin_maximum' ),
+			'general',
+			'loggedin_settings'
+		);
+
+		// Add new setting filed to set the limit.
+		add_settings_field(
+			'loggedin_logic',
+			'<label for="loggedin_logic">' . __( 'Login Logic', 'loggedin' ) . '</label>',
+			array( &$this, 'loggedin_logic' ),
 			'general',
 			'loggedin_settings'
 		);
@@ -122,7 +133,7 @@ class Loggedin_Admin {
 	}
 
 	/**
-	 * Create new options field to show the.
+	 * Create new options field to show the limit settings.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -138,6 +149,25 @@ class Loggedin_Admin {
 		echo '<p class="description">' . __( 'Set the maximum no. of active logins a user account can have.', 'loggedin' ) . '</p>';
 		echo '<p class="description">' . __( 'If this limit reached, next login request will be failed and user will have to logout from one device to continue.', 'loggedin' ) . '</p>';
 		echo '<p class="description"><strong>' . __( 'Note: ', 'loggedin' ) . '</strong>' . __( 'Even if the browser is closed, login session may exist.', 'loggedin' ) . '</p>';
+	}
+
+	/**
+	 * Create new options field to show the.
+	 *
+	 * @since  1.2.0
+	 * @access public
+	 * @uses   get_option() To get the option value.
+	 *
+	 * @return void
+	 */
+	public function loggedin_logic() {
+		// Get settings value.
+		$value = get_option( 'loggedin_logic', 'allow' );
+
+		echo '<input type="radio" name="loggedin_logic" value="allow" ' . checked( $value, 'allow', false ) . '/> ' . __( 'Allow', 'loggedin' );
+		echo ' <input type="radio" name="loggedin_logic" value="block" ' . checked( $value, 'block', false ) . '/> ' . __( 'Block', 'loggedin' );
+		echo '<p class="description">' . __( '<strong>Allow:</strong> Allow new login by terminating <strong>all</strong> old sessions when the limit is reached.', 'loggedin' ) . '</p>';
+		echo '<p class="description">' . __( '<strong>Block:</strong> Do not allow new login if the limit is reached. Users needs to wait for the old login sessions to expire.', 'loggedin' ) . '</p>';
 	}
 
 	/**
