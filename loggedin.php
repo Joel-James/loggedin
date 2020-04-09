@@ -37,16 +37,14 @@ if ( ! class_exists( 'Loggedin' ) ) {
 		dirname( plugin_basename( __FILE__ ) ) . '/languages/'
 	);
 
-	// Only execute if not admin side.
-	if ( ! is_admin() ) {
-		require dirname( __FILE__ ) . '/includes/class-loggedin.php';
-		new Loggedin();
-	}
-
-	// Only execute if admin side
-	if ( is_admin() ) {
+	if ( is_admin() && ! wp_doing_ajax() ) {
+		// Only execute if admin side
 		require dirname( __FILE__ ) . '/includes/class-loggedin-admin.php';
 		new Loggedin_Admin();
+	}else{
+		// Only execute if not admin side and ajax calls.	
+		require dirname( __FILE__ ) . '/includes/class-loggedin.php';
+		new Loggedin();
 	}
 }
 
