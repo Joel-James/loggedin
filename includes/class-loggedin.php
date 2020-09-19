@@ -140,10 +140,12 @@ class Loggedin {
 		 *
 		 * @param bool $reached Reached.
 		 * @param int  $user_id User ID.
+		 * @param int  $count   Active logins count.
 		 *
 		 * @since 1.3.0
+		 * @since 1.3.1 Added count param.
 		 */
-		return apply_filters( 'loggedin_reached_limit', $reached, $user_id );
+		return apply_filters( 'loggedin_reached_limit', $reached, $user_id, $count );
 	}
 
 	/**
