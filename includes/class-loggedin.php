@@ -32,9 +32,9 @@ class Loggedin {
 	 */
 	public function __construct() {
 		// Use authentication filter.
-		add_filter( 'wp_authenticate_user', array( $this, 'validate_allow_logic' ) );
+		add_filter( 'wp_authenticate_user', array( $this, 'validate_block_logic' ) );
 		// Use password check filter.
-		add_filter( 'check_password', array( $this, 'validate_block_logic' ), 10, 4 );
+		add_filter( 'check_password', array( $this, 'validate_allow_logic' ), 10, 4 );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Loggedin {
 	 *
 	 * @return bool
 	 */
-	public function validate_block_logic( $check, $password, $hash, $user_id ) {
+	public function validate_allow_logic( $check, $password, $hash, $user_id ) {
 		// If the validation failed already, bail.
 		if ( ! $check ) {
 			return false;
@@ -87,7 +87,7 @@ class Loggedin {
 	 *
 	 * @return object User object or error object.
 	 */
-	public function validate_allow_logic( $user ) {
+	public function validate_block_logic( $user ) {
 		// If login validation failed already, return that error.
 		if ( is_wp_error( $user ) ) {
 			return $user;
