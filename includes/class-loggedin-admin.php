@@ -105,7 +105,7 @@ class Loggedin_Admin {
 		// Add new settings section.
 		add_settings_section(
 			'loggedin_settings',
-			'🔐 Loggedin Settings',
+			__( '🔐 Loggedin Settings', 'loggedin' ),
 			'',
 			'general'
 		);
