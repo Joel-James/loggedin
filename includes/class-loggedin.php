@@ -35,6 +35,8 @@ class Loggedin {
 		add_filter( 'wp_authenticate_user', array( $this, 'validate_block_logic' ) );
 		// Use password check filter.
 		add_filter( 'check_password', array( $this, 'validate_allow_logic' ), 10, 4 );
+		// Use to set cookie and show success message
+		add_action( 'init', array($this, 'set_cookie') );
 	}
 
 	/**
@@ -193,6 +195,24 @@ class Loggedin {
 		 * @since 1.0.0
 		 */
 		return apply_filters( 'loggedin_error_message', $message );
+	}
+
+	/**
+	 * Set cookie for deleting it later
+	 * 
+	 * @since 1.4.0
+	 * @access public
+	 * 
+	 * @return void
+	 */
+	public function set_cookie() {
+		if(isset($_REQUEST['loggedin_clean_session'])) {
+			if ( !isset($_COOKIE['loggedin_clean_session']) ) {
+				setcookie('loggedin_clean_session', 1, time()+(10*60), '/');
+
+				echo '<script>alert("sucess");</script>';
+			}
+		}
 	}
 
 }
