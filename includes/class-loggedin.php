@@ -96,7 +96,14 @@ class Loggedin {
 		}
 
 		// Only when block method.
-		if ( 'block' === get_option( 'loggedin_logic', 'allow' ) ) {
+		if ( 'semiBlock' === get_option( 'loggedin_logic', 'allow' ) ) {
+			if (!isset($_COOKIE['loggedin_clean_session'])) {
+				// Check if limit exceed.
+				if ( $this->reached_limit( $user->ID ) ) {
+					return new WP_Error( 'loggedin_reached_limit', $this->error_message() );
+				}
+			}
+		}elseif ( 'block' === get_option( 'loggedin_logic', 'allow' ) ) {
 			// Check if limit exceed.
 			if ( $this->reached_limit( $user->ID ) ) {
 				return new WP_Error( 'loggedin_reached_limit', $this->error_message() );
