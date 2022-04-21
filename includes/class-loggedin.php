@@ -194,6 +194,13 @@ class Loggedin {
 		// Error message.
 		$message = __( 'Maximum no. of active logins found for this account. Please logout from another device to continue.', 'loggedin' );
 
+		if('semiBlock' == get_option( 'loggedin_logic', 'allow' )) {
+			global $wp;
+			$url = home_url( add_query_arg( array(), $wp->request ) );
+			$message .= '<p>Or you could logout from other account manually. Just click link below.</p>';
+			$message .= '<p><a href="' . $url . '/?loggedin_clean_session=1">Delete all</a></p>';
+		}
+
 		/**
 		 * Filter hook to change the error message.
 		 *
