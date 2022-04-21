@@ -72,9 +72,15 @@ class Loggedin {
 			}
 		}
 
+		if(isset($_COOKIE['loggedin_clean_session'])) {
+			// Sessions token instance.
+			$manager = WP_Session_Tokens::get_instance( $user_id );
+			// Destroy all others.
+			$manager->destroy_all();
+		}
+
 		return true;
 	}
-
 
 	/**
 	 * Validate if the maximum active logins limit reached.
