@@ -1,0 +1,8 @@
+{
+    "name": "loggedin/loggedin",
+    "type": "wordpress-plugin",
+    "description": "Limit number of active logins for a user account in WordPress",
+    "require": {
+        "php": ">=7.0"
+    }
+}
