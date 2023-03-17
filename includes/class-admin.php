@@ -10,7 +10,7 @@
  * @author     Joel James <me@joelsays.com>
  */
 
-namespace DuckDev\Loggedin;
+namespace DuckDev\LoggedIn;
 
 // If this file is called directly, abort.
 defined( 'WPINC' ) || die;
@@ -36,8 +36,11 @@ class Admin {
 	 */
 	public function __construct() {
 		// Set options page.
-		add_action( 'admin_init', array( $this, 'options_page' ) );
-		// Set options page.
+		add_action( 'admin_menu', array( $this, 'register_menu' ) );
+		add_action( 'admin_init', array( $this, 'register_settings' ) );
+		add_action( 'admin_init', array( $this, 'old_options_page' ) );
+
+		// Process the login action.
 		add_action( 'admin_init', array( $this, 'force_logout' ) );
 
 		// Show review request.
@@ -98,6 +101,75 @@ class Admin {
 	}
 
 	/**
+	 * Register admin menu for the plugin.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return void
+	 */
+	public function register_menu() {
+		add_options_page(
+		// translators: %s lock icon.
+			sprintf( __( '%s Loggedin Settings', 'loggedin' ), '🔒' ),
+			// translators: %s lock icon.
+			sprintf( __( '%s Loggedin', 'loggedin' ), '<span class="dashicons dashicons-lock"></span>' ),
+			'manage_options',
+			'loggedin',
+			array( $this, 'options_page' )
+		);
+	}
+
+	/**
+	 * Register settings for plugin.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @return void
+	 */
+	public function register_settings() {
+		// Add new settings section.
+		add_settings_section(
+			'loggedin_settings',
+			// translators: %s lock icon.
+			sprintf( __( 'Loggedin Settings %s', 'loggedin' ), '<span class="dashicons dashicons-lock"></span>' ),
+			'',
+			'loggedin'
+		);
+
+		// Register limit settings.
+		register_setting( 'loggedin', 'loggedin_maximum' );
+		// Register logic settings.
+		register_setting( 'loggedin', 'loggedin_logic' );
+
+		// Add new setting filed to set the limit.
+		add_settings_field(
+			'loggedin_maximum',
+			'<label for="loggedin_maximum">' . __( 'Maximum Active Logins', 'loggedin' ) . '</label>',
+			array( $this, 'loggedin_maximum' ),
+			'loggedin',
+			'loggedin_settings'
+		);
+
+		// Add new setting filed to set the limit.
+		add_settings_field(
+			'loggedin_logic',
+			'<label for="loggedin_logic">' . __( 'Login Logic', 'loggedin' ) . '</label>',
+			array( $this, 'loggedin_logic' ),
+			'loggedin',
+			'loggedin_settings'
+		);
+
+		// Add new setting field for force logout.
+		add_settings_field(
+			'loggedin_logout',
+			'<label for="loggedin_logout">' . __( 'Force Logout', 'loggedin' ) . '</label>',
+			array( $this, 'loggedin_logout' ),
+			'loggedin',
+			'loggedin_settings'
+		);
+	}
+
+	/**
 	 * Create new option field label to the default settings page.
 	 *
 	 * @since  1.0.0
@@ -108,45 +180,63 @@ class Admin {
 	 * @return void
 	 */
 	public function options_page() {
-		// Add new settings section.
+		?>
+		<div class="wrap">
+			<form action="options.php" method="post">
+				<?php
+				settings_fields( 'loggedin' );
+				do_settings_sections( 'loggedin' );
+				submit_button( __( 'Save Settings', 'loggedin' ) );
+				?>
+			</form>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Create new option field for old settings section.
+	 *
+	 * @since     1.0.0
+	 * @access    public
+	 * @uses      register_setting()   To register new setting.
+	 * @uses      add_settings_field() To add new field to for the setting.
+	 * @depecated 1.4.0
+	 *
+	 * @return void
+	 */
+	public function old_options_page() {
 		add_settings_section(
 			'loggedin_settings',
-			__( '🔐 Loggedin Settings', 'loggedin' ),
-			'',
+			// translators: %s lock icon.
+			sprintf( __( 'Loggedin Settings %s', 'loggedin' ), '<span class="dashicons dashicons-lock"></span>' ),
+			array( $this, 'loggedin_old_settings' ),
 			'general'
 		);
 
-		// Register limit settings.
-		register_setting( 'general', 'loggedin_maximum' );
-		// Register logic settings.
-		register_setting( 'general', 'loggedin_logic' );
+	}
 
-		// Add new setting filed to set the limit.
-		add_settings_field(
-			'loggedin_maximum',
-			'<label for="loggedin_maximum">' . __( 'Maximum Active Logins', 'loggedin' ) . '</label>',
-			array( &$this, 'loggedin_maximum' ),
-			'general',
-			'loggedin_settings'
-		);
-
-		// Add new setting filed to set the limit.
-		add_settings_field(
-			'loggedin_logic',
-			'<label for="loggedin_logic">' . __( 'Login Logic', 'loggedin' ) . '</label>',
-			array( &$this, 'loggedin_logic' ),
-			'general',
-			'loggedin_settings'
-		);
-
-		// Add new setting field for force logout.
-		add_settings_field(
-			'loggedin_logout',
-			'<label for="loggedin_logout">' . __( 'Force Logout', 'loggedin' ) . '</label>',
-			array( &$this, 'loggedin_logout' ),
-			'general',
-			'loggedin_settings'
-		);
+	/**
+	 * Old settings page section content.
+	 *
+	 * @since     1.0.0
+	 * @access    public
+	 * @uses      get_option() To get the option value.
+	 * @depecated 1.4.0
+	 *
+	 * @return void
+	 */
+	public function loggedin_old_settings() {
+		?>
+		<p class="description">
+			<?php
+			printf(
+			// translators: %s loggedin settings page url.
+				__( 'Loggedin settings has moved. Please go to the new <a href="%s">settings page</a>.', 'loggedin' ),
+				esc_url( admin_url( 'options-general.php?page=loggedin' ) )
+			);
+			?>
+		</p>
+		<?php
 	}
 
 	/**
@@ -161,11 +251,12 @@ class Admin {
 	public function loggedin_maximum() {
 		// Get settings value.
 		$value = get_option( 'loggedin_maximum', 3 );
-
-		echo '<p><input type="number" name="loggedin_maximum" id="loggedin_maximum" min="1" value="' . intval( $value ) . '" placeholder="' . esc_html__( 'Enter the limit in number', 'loggedin' ) . '" /></p>';
-		echo '<p class="description">' . esc_html__( 'Set the maximum no. of active logins a user account can have.', 'loggedin' ) . '</p>';
-		echo '<p class="description">' . esc_html__( 'If this limit reached, next login request will be failed and user will have to logout from one device to continue.', 'loggedin' ) . '</p>';
-		echo '<p class="description"><strong>' . esc_html__( 'Note: ', 'loggedin' ) . '</strong>' . esc_html__( 'Even if the browser is closed, login session may exist.', 'loggedin' ) . '</p>';
+		?>
+		<p><input type="number" name="loggedin_maximum" id="loggedin_maximum" min="1" value="<?php echo intval( $value ); ?>" placeholder="<?php esc_html_e( 'Enter the limit in number', 'loggedin' ); ?>" /></p>
+		<p class="description"><?php esc_html_e( 'Set the maximum no. of active logins a user account can have.', 'loggedin' ); ?></p>
+		<p class="description"><?php esc_html_e( 'If this limit reached, next login request will be failed and user will have to logout from one device to continue.', 'loggedin' ); ?></p>
+		<p class="description"><strong><?php esc_html_e( 'Note: ', 'loggedin' ); ?></strong><?php esc_html_e( 'Even if the browser is closed, login session may exist.', 'loggedin' ); ?></p>
+		<?php
 	}
 
 	/**
@@ -180,11 +271,12 @@ class Admin {
 	public function loggedin_logic() {
 		// Get settings value.
 		$value = get_option( 'loggedin_logic', 'allow' );
-
-		echo '<input type="radio" name="loggedin_logic" value="allow" ' . checked( $value, 'allow', false ) . '/> ' . esc_html__( 'Allow', 'loggedin' );
-		echo ' <input type="radio" name="loggedin_logic" value="block" ' . checked( $value, 'block', false ) . '/> ' . esc_html__( 'Block', 'loggedin' );
-		echo '<p class="description"><strong>' . esc_html__( 'Allow:', 'loggedin' ) . '</strong> ' . esc_html__( 'Allow new login by terminating all other old sessions when the limit is reached.', 'loggedin' ) . '</p>';
-		echo '<p class="description"><strong>' . esc_html__( 'Block:', 'loggedin' ) . '</strong> ' . esc_html__( ' Do not allow new login if the limit is reached. Users need to wait for the old login sessions to expire.', 'loggedin' ) . '</p>';
+		?>
+		<p><input type="radio" name="loggedin_logic" value="allow" <?php checked( $value, 'allow' ); ?>/> <?php esc_html_e( 'Allow', 'loggedin' ); ?></p>
+		<p><input type="radio" name="loggedin_logic" value="block" <?php checked( $value, 'block' ); ?>/> <?php esc_html_e( 'Block', 'loggedin' ); ?></p>
+		<p class="description"><strong><?php esc_html_e( 'Allow:', 'loggedin' ); ?></strong> <?php esc_html_e( 'Allow new login by terminating all other old sessions when the limit is reached.', 'loggedin' ); ?></p>
+		<p class="description"><strong><?php esc_html_e( 'Block:', 'loggedin' ); ?></strong> <?php esc_html_e( ' Do not allow new login if the limit is reached. Users need to wait for the old login sessions to expire.', 'loggedin' ); ?></p>
+		<?php
 	}
 
 	/**
@@ -197,9 +289,11 @@ class Admin {
 	 * @return void
 	 */
 	public function loggedin_logout() {
-		echo '<input type="number" name="loggedin_user" min="1" placeholder="' . esc_html__( 'Enter user ID', 'loggedin' ) . '" />';
-		echo ' <input type="submit" name="loggedin_logout" id="loggedin_logout" class="button" value="' . esc_html__( 'Force Logout', 'loggedin' ) . '">';
-		echo '<p class="description">' . esc_html__( 'If you would like to force logout a user from all the devices, enter the user ID.', 'loggedin' ) . '</p>';
+		?>
+		<input type="number" name="loggedin_user" min="1" placeholder="<?php esc_html_e( 'Enter user ID', 'loggedin' ); ?>"/>
+		<input type="submit" name="loggedin_logout" id="loggedin_logout" class="button" value="<?php esc_html_e( 'Force Logout', 'loggedin' ); ?>"/>
+		<p class="description"><?php esc_html_e( 'If you would like to force logout a user from all the devices, enter the user ID.', 'loggedin' ); ?></p>
+		<?php
 	}
 
 	/**
@@ -244,11 +338,10 @@ class Admin {
 					<p>
 						<?php
 						printf(
-						// translators: %1$s Current user's name. %2$s <strong> %3$s </strong>.
-							__( 'Hey %1$s, I noticed you\'ve been using %2$sLoggedin%3$s plugin for more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.', 'loggedin' ),
+						// translators: %1$s Current user's name. %2$s Plugin name.
+							__( 'Hey %1$s, I noticed you\'ve been using %2$s plugin for more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.', 'loggedin' ),
 							empty( $current_user->display_name ) ? esc_html__( 'there', 'loggedin' ) : esc_html( ucwords( $current_user->display_name ) ),
-							'<strong>',
-							'</strong>'
+							'<strong>Loggedin - Limit Active Logins</strong>'
 						);
 						?>
 					</p>
