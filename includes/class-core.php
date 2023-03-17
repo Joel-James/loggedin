@@ -10,15 +10,20 @@
  * @author     Joel James <me@joelsays.com>
  */
 
+namespace DuckDev\Loggedin;
+
 // If this file is called directly, abort.
-defined( 'WPINC' ) || die( 'Well, get lost.' );
+defined( 'WPINC' ) || die;
+
+use WP_Error;
+use WP_Session_Tokens;
 
 /**
- * Class Loggedin
+ * Class Core.
  *
  * @since 1.0.0
  */
-class Loggedin {
+class Core {
 
 	/**
 	 * Initialize the class and set its properties.

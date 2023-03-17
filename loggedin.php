@@ -30,23 +30,21 @@
  * along with LoggedIn. If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace DuckDev\Loggedin;
+
 // If this file is called directly, abort.
-defined( 'WPINC' ) || die( 'Well, get lost.' );
+defined( 'WPINC' ) || die;
 
 // Make sure loggedin is not already defined.
-if ( ! function_exists( 'loggedin_init' ) ) {
+if ( ! function_exists( __NAMESPACE__ . '\\init' ) ) {
 	/**
 	 * Main instance of plugin.
 	 *
-	 * Returns the main instance of Beehive to prevent the need to use globals
-	 * and to maintain a single copy of the plugin object.
-	 * You can simply call beehive_analytics() to access the object.
-	 *
-	 * @since  1.3.0
+	 * @since 1.3.0
 	 *
 	 * @return void
 	 */
-	function loggedin_init() {
+	function init() {
 		// Load text domain.
 		load_plugin_textdomain(
 			'loggedin',
@@ -55,16 +53,15 @@ if ( ! function_exists( 'loggedin_init' ) ) {
 		);
 
 		// Load required files.
-		require dirname( __FILE__ ) . '/includes/class-loggedin.php';
-		require dirname( __FILE__ ) . '/includes/class-loggedin-admin.php';
+		require dirname( __FILE__ ) . '/includes/class-core.php';
+		require dirname( __FILE__ ) . '/includes/class-admin.php';
 
-		// Load core class.
-		new Loggedin();
-		// Load admin class.
-		new Loggedin_Admin();
+		// Load classes.
+		new Core();
+		new Admin();
 
 		/**
-		 * Action hook to execute after LoggedIn plugin init.
+		 * Action hook to execute after our plugin init.
 		 *
 		 * Use this hook to init addons.
 		 *
@@ -75,4 +72,4 @@ if ( ! function_exists( 'loggedin_init' ) ) {
 }
 
 // Init the plugin.
-add_action( 'plugins_loaded', 'loggedin_init' );
+add_action( 'plugins_loaded', __NAMESPACE__ . '\\init' );
