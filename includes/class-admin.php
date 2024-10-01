@@ -131,7 +131,7 @@ class Admin {
 		add_settings_section(
 			'loggedin_settings',
 			// translators: %s lock icon.
-			sprintf( __( 'Loggedin Settings %s', 'loggedin' ), '<span class="dashicons dashicons-lock"></span>' ),
+			sprintf( __( '%s Loggedin Settings', 'loggedin' ), '<span class="dashicons dashicons-lock"></span>' ),
 			'',
 			'loggedin'
 		);
@@ -208,7 +208,7 @@ class Admin {
 		add_settings_section(
 			'loggedin_settings',
 			// translators: %s lock icon.
-			sprintf( __( 'Loggedin Settings %s', 'loggedin' ), '<span class="dashicons dashicons-lock"></span>' ),
+			sprintf( __( '%s Loggedin Settings', 'loggedin' ), '<span class="dashicons dashicons-lock"></span>' ),
 			array( $this, 'loggedin_old_settings' ),
 			'general'
 		);
