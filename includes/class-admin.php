@@ -231,7 +231,7 @@ class Admin {
 			<?php
 			printf(
 			// translators: %s loggedin settings page url.
-				__( 'Loggedin settings has moved. Please go to the new <a href="%s">settings page</a>.', 'loggedin' ),
+				__( 'Loggedin settings have been relocated. <a href="%s">Click here</a> to access the new settings page.', 'loggedin' ),
 				esc_url( admin_url( 'options-general.php?page=loggedin' ) )
 			);
 			?>
