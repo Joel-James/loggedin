@@ -234,34 +234,34 @@ class Loggedin_Admin {
 			// Continue only when allowed.
 			if ( (int) $notice_time <= time() && ! $dismissed ) {
 				?>
-                <div class="notice notice-success">
-                    <p>
+				<div class="notice notice-success">
+					<p>
 						<?php
 						printf(
-						    // translators: %1$s Current user's name. %2$s <strong> %3$s </strong>.
+						// translators: %1$s Current user's name. %2$s <strong> %3$s </strong>.
 							__( 'Hey %1$s, I noticed you\'ve been using %2$sLoggedin%3$s plugin for more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.', 'loggedin' ),
-							empty( $current_user->display_name ) ? esc_html__( 'there', 'loggedin' ) : ucwords( $current_user->display_name ),
+							empty( $current_user->display_name ) ? esc_html__( 'there', 'loggedin' ) : esc_attr( ucwords( $current_user->display_name ) ),
 							'<strong>',
 							'</strong>'
 						);
 						?>
-                    </p>
-                    <p>
-                        <a href="https://wordpress.org/support/plugin/loggedin/reviews/#new-post" target="_blank">
+					</p>
+					<p>
+						<a href="https://wordpress.org/support/plugin/loggedin/reviews/#new-post" target="_blank">
 							<?php esc_html_e( 'Ok, you deserve it', 'loggedin' ); ?>
-                        </a>
-                    </p>
-                    <p>
-                        <a href="<?php echo add_query_arg( 'loggedin_rating', 'later' ); // later. ?>">
+						</a>
+					</p>
+					<p>
+						<a href="<?php echo esc_url( add_query_arg( 'loggedin_rating', 'later' ) ); // later. ?>">
 							<?php esc_html_e( 'Nope, maybe later', 'loggedin' ); ?>
-                        </a>
-                    </p>
-                    <p>
-                        <a href="<?php echo add_query_arg( 'loggedin_rating', 'dismiss' ); // dismiss link. ?>">
+						</a>
+					</p>
+					<p>
+						<a href="<?php echo esc_url( add_query_arg( 'loggedin_rating', 'dismiss' ) ); // dismiss link. ?>">
 							<?php esc_html_e( 'I already did', 'loggedin' ); ?>
-                        </a>
-                    </p>
-                </div>
+						</a>
+					</p>
+				</div>
 				<?php
 			}
 		}
@@ -278,6 +278,11 @@ class Loggedin_Admin {
 	 * @return void
 	 */
 	public function review_action() {
+		// Only for admins.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		// Get the current review action.
 		// phpcs:ignore
 		$action = isset( $_REQUEST['loggedin_rating'] ) ? $_REQUEST['loggedin_rating'] : '';

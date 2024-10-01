@@ -5,7 +5,7 @@ Light weight WordPress plugin to limit number of active logins from an account. 
 
 **Contributors:** [Joel James](https://profiles.wordpress.org/joelcj91)  
 **Requires at least:** 4.0<br />
-**Tested up to:** 5.5<br />
+**Tested up to:** 6.6<br />
 **Stable tag:** 1.3.1<br />
 **Requires PHP:** 5.6<br />
 **License:** [GPLv2+](https://www.gnu.org/licenses/gpl-2.0.html)  
