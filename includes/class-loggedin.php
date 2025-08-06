@@ -152,6 +152,10 @@ class Loggedin {
 		if ( $oldest_token ) {
 			unset( $sessions[ $oldest_token ] );
 			update_user_meta( $user_id, 'session_tokens', $sessions );
+
+      // Also destroy the session token instance.
+      $manager = WP_Session_Tokens::get_instance( $user_id );
+      $manager->destroy( $oldest_token );
 		}
 	}
 
