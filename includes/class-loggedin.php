@@ -152,6 +152,7 @@ class Loggedin {
 		if ( $oldest_token ) {
 			unset( $sessions[ $oldest_token ] );
 			update_user_meta( $user_id, 'session_tokens', $sessions );
+			$this->maybe_show_wc_notice();
 		}
 	}
 
@@ -244,6 +245,22 @@ class Loggedin {
 		 * @since 1.0.0
 		 */
 		return apply_filters( 'loggedin_error_message', $message );
+	}
+
+
+	/**
+	 * Output a notice if user exceeded maximum amount of logins.
+	 */
+	public function maybe_show_wc_notice() {
+		if ( function_exists( 'wc_add_notice' ) ) {
+			// We need to manually set the customer session cookie
+			// because WooCommerce only sets it at the beginning of the request.
+			WC()->session->set_customer_session_cookie( true );
+			wc_add_notice(
+				__( 'The maximum number of active sessions for your account has been exceeded. Therefore, your oldest session has been terminated.', 'loggedin' ),
+				'notice'
+			);
+		}
 	}
 
 }
