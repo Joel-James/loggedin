@@ -23,6 +23,13 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
+# Build files
+*.zip
+
 # Unwanted config files
-package-lock.json
 composer.lock
+package-lock.json
+
+# Docs
+docs/.vitepress/dist
+docs/.vitepress/cache

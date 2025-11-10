@@ -4,17 +4,19 @@
  *
  * @package LoggedIn
  *
- * Plugin Name:     Loggedin - Limit Active Logins
- * Plugin URI:      https://duckdev.com/products/loggedin-limit-active-logins/
- * Description:     Limit an account to a specific number of simultaneous logins across all devices.
- * Version:         2.0.0
- * Author:          Joel James
- * Author URI:      https://duckdev.com/
- * Donate link:     https://paypal.me/JoelCJ
- * License:         GPL-2.0+
- * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:     loggedin
- * Domain Path:     /languages
+ * Plugin Name:         Loggedin - Limit Concurrent Sessions
+ * Plugin URI:          https://duckdev.com/products/loggedin-limit-active-logins/
+ * Description:         Limit an account to a specific number of simultaneous logins across all devices.
+ * Version:             2.0
+ * Author:              Joel James
+ * Author URI:          https://duckdev.com/
+ * Donate link:         https://paypal.me/JoelCJ
+ * License:             GPL-2.0+
+ * License URI:         http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:         loggedin
+ * Domain Path:         /languages
+ * Requires PHP:        7.4
+ * Requires at least:   5.0
  *
  * Loggedin is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

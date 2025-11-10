@@ -53,7 +53,8 @@ use DuckDev\Loggedin\View;
 	<p>
 		<?php
 		printf(
-			esc_attr__( 'Missing an extension that you think you should be able to see? %sRefresh the list now%s', 'loggedin' ),
+			// translators: Link to refresh action.
+			esc_attr__( 'Missing an extension that you think you should be able to see? %1$sRefresh the list now%2$s', 'loggedin' ),
 			'<a href="' . esc_url_raw( wp_nonce_url( add_query_arg( 'loggedin-addons-refresh', 1 ), 'loggedin-addons-refresh' ) ) . '">',
 			'</a>'
 		);

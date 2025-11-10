@@ -1,156 +1,139 @@
-=== Loggedin - Limit Active Logins ===
+=== Loggedin - Limit Concurrent Sessions ===
 Contributors: joelcj91,duckdev
-Tags: login, logout, limit active logins, login limit, concurrent logins
+Tags: login, logout, limit, sessions, user login
 Donate link: https://paypal.me/JoelCJ
-Requires at least: 4.0
-Tested up to: 6.6
-Stable tag: 2.0.0
-Requires PHP: 5.6
+Requires at least: 5.0
+Tested up to: 6.8
+Stable tag: 2.0
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Light weight plugin to limit number of active logins from an account. Set maximum number of concurrent logins a user can have from multiple places.
+Lightweight plugin that limits an account to a specific number of concurrent logins.
 
 == Description ==
 
-By default in WordPress users can login using one account from **unlimited** devices/browsers at a time. This is not good for everyone, seriously! With this plugin you can easily set a limit for no. of active logins a user can have.
+Loggedin is a lightweight WordPress plugin that lets you easily limit the number of simultaneous active sessions a user can have. This is a crucial feature for membership sites, online courses, and other platforms where you need to prevent users from sharing their accounts.
 
+### 🎁 Features
 
-> #### Loggedin 🔒 Features and Advantages
->
-> - **Set maximum no. of active logins for a user**.<br />
-> - **Block new logins when the login limit is reached.**<br />
-> - **Allow new logins while logging out from other devices when the limit is reached.**<br />
-> - **Force logout users from admin.**<br />
-> - Prevent users from sharing their account.<br />
-> - Useful for membership sites (for others too).<br />
-> - No complex settings. Just one optional field to set the limit.<br />
-> - Super Light weight.<br />
-> - Filter to bypass login limit for certain users or roles.<br />
-> - Completely free to use with lifetime updates.<br />
-> - Follows best WordPress coding standards.<br />
->
-> [Installation](https://wordpress.org/plugins/loggedin/installation/) | [Support](http://wordpress.org/support/plugin/loggedin/) | [Screenshots](https://wordpress.org/plugins/loggedin/screenshots/)
+- **Set Global Limits**: Define a maximum number of concurrent logins for all users.
+- **Flexible Login Behavior**: Choose to either block new logins when the limit is reached or automatically log out the oldest session to allow a new one.
+- **Prevent Account Sharing**: By limiting sessions, you can effectively stop users from sharing their login credentials with others.
+- **Admin Control**: Easily force log out a user from the admin dashboard, giving you full control over active sessions.
+- **Developer-Friendly**: The plugin is built with a hook-based architecture, making it highly customizable and extensible for developers.
 
-Please contribute to the plugin development in [GitHub](https://github.com/joel-james/LoggedIn).
+### 📦 Addons
 
-**🔐 Important Notice**
+Enhance LoggedIn's functionality with these simple yet powerful [add-ons](https://duckdev.com/addons/loggedin/).
 
-Even if the user is closing the browser without logging out, their login session exists for period of time. So this will also considered as an active login.
+* **[Limit Per User](https://duckdev.com/addon/limit-per-user/)**: For more granular control, the Limit Per User addon allows you to set specific login limits for individual users, overriding the global settings. This is perfect for offering different tiers of access or special privileges.
+
+* **[Real-time Logout](https://duckdev.com/addon/real-time-logout/)**: This add-on ensures a truly seamless experience by checking for logouts in real time. When a user's session is terminated in the background due to a login limit, the add-on will automatically refresh their page, instantly restricting access.
+
+### 🐛 Bug Reports
+
+Found a bug? We welcome your bug reports! Please report any issues directly on the [Loggedin GitHub repository](https://github.com/Joel-James/loggedin/issues).
+
+_Please note: GitHub is for bug reports and development-related issues only. For support, please use the WordPress.org support forums._
 
 == Installation ==
 
-
-= Installing the plugin - Simple =
-1. In your WordPress admin panel, go to *Plugins > New Plugin*, search for **LoggedIn** and click "*Install now*"
-2. Alternatively, download the plugin and upload the contents of `loggedin.zip` to your plugins directory, which usually is `/wp-content/plugins/`.
-3. Activate the plugin
-4. Go to General tab under WordPress Settings menu.
-5. Find the "Maximum Active Logins" option and select the maximum number of active logins for a user account.
-
-
-= Missing something? =
-If you would like to have an additional feature for this plugin, [let me know](https://duckdev.com/support/)
+1. Install Loggedin either via the WordPress.org plugin repository or by uploading the files to your server. (See instructions on [how to install Loggedin](https://docs.duckdev.com/general/installing-plugin))
+2. Activate the plugin.
+3. Go to *Users > Loggedin* to configure it.
 
 == Frequently Asked Questions ==
 
-= How can I set the limit, and where? 🤔 =
+= Where can I find the settings for Loggedin? =
 
-This plugin does not have a seperate settings page. But we have one configural settings to let you set the login limit.
+You can find the plugin settings by navigating to **Users > Loggedin** in your WordPress admin dashboard.
 
-1. Go to `Settings` page in admin dashboard.
-2. Scroll down to see the section `🔐 Loggedin`.
-3. Set the maximum number of active logins a user can have in `Maximum Active Logins` option.
+= What are the available login logic options? =
 
-= Can I somehow allow new logins when the limit is reached? 🤔 =
+Currently, the plugin offers three built-in login logic options:
 
-You can forcefully logout the user from other devices and allow new login.
+* **Logout Oldest**: When a user reaches the login limit, their oldest active session will be automatically terminated to allow for the new login.
+* **Logout All**: All other active sessions for the user will be logged out when a new session is started.
+* **Block New**: The new login attempt will be blocked if the user has already reached the maximum number of active sessions.
 
-1. Go to `Settings` page in admin dashboard.
-2. Scroll down to see the section `🔐 Loggedin`.
-3. Select the `Login Logic` as `Allow`.
+Additional logic options can be added using third-party plugins or custom code. For more details, [see our documentation here](https://docs.duckdev.com/loggedin/general-settings#login-logic).
 
-= Can I block the new logins when the limit is reached? 🤔 =
+= How long does a login session last? =
 
-You block the new logins when the user is logged in from maximum no. of devices according to the limit you set.
+The duration of a login session is determined by WordPress's default settings.
 
-1. Go to `Settings` page in admin dashboard.
-2. Scroll down to see the section `🔐 Loggedin`.
-3. Select the `Login Logic` as `Block`.
-4. Now user will have to wait for the other login sessions to expire before login from new device.
+* If the "Remember Me" box is checked during login, the session will last for 14 days.
+* If the "Remember Me" box is not checked, the session will last for 2 days.
 
-= How long a login session exist? How long the user needs to wait for new login? 🤔 =
+You can customize this duration using the `auth_cookie_expiration` filter. Here's an example of how to set the session to one month:
 
-That depends. If the “Remember Me” box is checked while login, WordPress will keep the user logged in for 14 days by default. If “Remember Me” is not checked, 2 days will be the active login session time.
-
-You can change that period using, auth_cookie_expiration filter.
-
-<pre lang="php">
-function loggedin_auth_cookie_expiration( $expire ) {
-    // Allow for a month.
-    return MONTH_IN_SECONDS;
+```php
+function custom_auth_cookie_expiration( $expire ) {
+    return MONTH_IN_SECONDS; // Sets the session to one month
 }
 
-add_filter( 'auth_cookie_expiration', 'loggedin_auth_cookie_expiration' );
-</pre>
+add_filter( 'auth_cookie_expiration', 'custom_auth_cookie_expiration' );
+```
 
-= How can I forcefully logout a user from all devices? 🤔 =
+= What if a user has reached the login limit but doesn't know which devices are active? =
 
-You can forcefully logout a user from all the devices he has logged into. Get his WordPress user ID and,
+Administrators can forcefully log a user out of all their active sessions from the dashboard.
 
-1. Go to `Settings` page in admin dashboard.
-2. Scroll down to see the section `🔐 Loggedin`.
-3. Enter user ID of the user you would like to logout.
-4. Click `Force Logout`.
+1. Find the user's WordPress ID.
+2. Go to **Users > Loggedin** in your WordPress admin panel.
+3. Navigate to the **Manage Sessions** section.
+4. Enter the user ID and click the **Force Logout** button to end all of their active sessions.
 
-= Can I bypass this limit for certain users or roles? 🤔 =
+= Can I bypass the login limit for specific users or roles? =
 
-Yes, of course. But this time you are going to add few lines of code. Don't worry. Just copy+paste this code in your theme's `functions.php` file or in custom plugin:
+Yes, you can bypass the limit for certain users or roles by adding a few lines of code to your theme's `functions.php` file or a custom plugin.
 
-<pre lang="php">
+To bypass specific user IDs, use the following code:
+
+```php
 function loggedin_bypass_users( $bypass, $user_id ) {
-    
-    // Enter the user IDs to bypass.
+    // Add the user IDs you want to bypass to this array.
     $allowed_users = array( 1, 2, 3, 4, 5 );
-
     return in_array( $user_id, $allowed_users );
 }
 
 add_filter( 'loggedin_bypass', 'loggedin_bypass_users', 10, 2 );
-</pre>
+```
 
-Or if you want to bypass this for certain roles:
+To bypass specific user roles, use this code:
 
-<pre lang="php">
+```php
 function loggedin_bypass_roles( $prevent, $user_id ) {
-
-    // Array of roles to bypass.
+    // Add the roles you want to bypass to this array.
     $allowed_roles = array( 'administrator', 'editor' );
-
     $user = get_user_by( 'id', $user_id );
-
     $roles = ! empty( $user->roles ) ? $user->roles : array();
-
-    return ! empty( array_intersect( $roles, $whitelist ) );
+    return ! empty( array_intersect( $roles, $allowed_roles ) );
 }
 
 add_filter( 'loggedin_bypass', 'loggedin_bypass_roles', 10, 2 );
-</pre>
-
-
-== Other Notes ==
-
-= 🐛 Bug Reports =
-
-Bug reports are always welcome - [report here](https://duckdev.com/support/).
-
+```
 
 == Screenshots ==
 
-1. **Settings** - Set maximum no. of active logins for a user account.
-
+1. **Settings**
+2. **Manage Sessions**
 
 == Changelog ==
+
+= 2.0.0 (10/11/2025) =
+
+**📦 New**
+
+* Settings page
+* Addons
+* Logout Oldest logic - Thanks [#19](https://github.com/Joel-James/loggedin/pull/19).
+
+**👌 Improvements**
+
+* Coding standards.
+* Sanitization.
 
 = 1.3.2 (01/10/2024) =
 

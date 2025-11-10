@@ -24,7 +24,7 @@ use DuckDev\Loggedin\View;
 
 ?>
 	<div class="wrap">
-	<h2><strong><?php esc_attr_e( 'Loggedin - Limit Active Logins', 'loggedin' ); ?></strong></h2>
+	<h2><strong>🔒 <?php esc_attr_e( 'Loggedin – Limit Concurrent Sessions', 'loggedin' ); ?></strong></h2>
 	<?php settings_errors(); ?>
 	<br/>
 <?php

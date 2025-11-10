@@ -51,9 +51,9 @@
 						id="loggedin_logic"
 						value="<?php echo esc_attr( $logic ); ?>"
 						<?php checked( $login_logic, $logic ); ?>
-					/> <?php echo $labels['label'] ?? ''; ?>
+					/> <?php echo esc_attr( $labels['label'] ) ?? ''; ?>
 				</p>
-				<p class="description"><?php echo $labels['desc'] ?? ''; ?></p>
+				<p class="description"><?php echo esc_attr( $labels['desc'] ) ?? ''; ?></p>
 			<?php endforeach; ?>
 		</td>
 	</tr>

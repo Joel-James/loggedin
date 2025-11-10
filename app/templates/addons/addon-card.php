@@ -29,7 +29,7 @@ use DuckDev\Loggedin\View;
 	<div class="plugin-card-top">
 		<div class="name column-name">
 			<h3>
-				<a href="<?php echo esc_url( $link ); ?>" target="_blank">
+				<a href="<?php echo esc_url( $homepage ); ?>" target="_blank">
 					<?php echo esc_html( $title ); ?>
 					<img src="<?php echo esc_url( $icon ); ?>" class="plugin-icon" alt="<?php echo esc_html( $title ); ?>">
 				</a>
@@ -70,7 +70,7 @@ use DuckDev\Loggedin\View;
 		</div>
 	<?php else : ?>
 		<div class="plugin-card-bottom">
-			<div class="column-rating"><strong><?php $is_premium ? esc_attr_e( 'Premium' ) : esc_attr_e( 'Free' ); ?></strong></div>
+			<div class="column-rating"><strong><?php $is_premium ? esc_attr_e( 'Premium', 'loggedin' ) : esc_attr_e( 'Free', 'loggedin' ); ?></strong></div>
 			<div class="column-updated">
 				<a href="<?php echo esc_url_raw( $homepage ); ?>" target="_blank"><?php esc_attr_e( 'More Details', 'loggedin' ); ?></a>
 			</div>
