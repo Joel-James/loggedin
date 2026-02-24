@@ -1,0 +1,35 @@
+{
+  "name": "loggedin",
+  "version": "2.0.4",
+  "description": "Limit an account to a specific number of simultaneous logins across all devices.",
+  "main": "loggedin.php",
+  "private": true,
+  "homepage": "https://github.com/Joel-James/loggedin/",
+  "author": {
+    "name": "Joel James",
+    "url": "https://duckdev.com"
+  },
+  "keywords": [
+    "loggedin",
+    "realtime-logout",
+    "logout",
+    "wordpress-plugin"
+  ],
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "pack": "wp-scripts plugin-zip"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.21.0"
+  },
+  "files": [
+    "app",
+    "includes",
+    "languages",
+    "vendor",
+    "loggedin.php",
+    "uninstall.php",
+    "readme.txt",
+    "!/.package.json"
+  ]
+}

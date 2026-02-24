@@ -1,0 +1,23 @@
+{
+  "name": "loggedin/loggedin",
+  "description": "Limit an account to a specific number of simultaneous logins across all devices.",
+  "version": "2.0.4",
+  "homepage": "https://wordpress.org/plugins/loggedin/",
+  "license": "GPL-2.0+",
+  "type": "wordpress-plugin",
+  "optimize-autoloader": true,
+  "config": {
+    "platform": {
+      "php": "7.4"
+    }
+  },
+  "autoload": {
+    "classmap": [
+      "includes/"
+    ]
+  },
+  "require": {
+    "php": ">=7.4",
+    "duckdev/freemius-plugin-licensing": "^1.0.0"
+  }
+}

@@ -15,17 +15,16 @@ defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
 // Delete all options added by the plugin.
 delete_option( 'loggedin_maximum' );
+delete_option( 'loggedin_logic' );
 delete_option( 'loggedin_rating_notice' );
 
 global $wpdb;
 
 // Delete all meta values added by the plugin.
-// phpcs:ignore
-$wpdb->delete(
+$wpdb->delete( // phpcs:ignore
 	$wpdb->usermeta,
 	array(
 		// Review notice meta.
-		// phpcs:ignore
-		'meta_key' => 'loggedin_rating_notice_dismissed',
+		'meta_key' => 'loggedin_rating_notice_dismissed', // phpcs:ignore
 	)
 );
