@@ -126,13 +126,13 @@ The duration of a WordPress login session is controlled by WordPress, not Logged
 
 Customize the duration with the standard `auth_cookie_expiration` filter:
 
-<pre lang="php">
+```php
 function custom_auth_cookie_expiration( $expire ) {
     return MONTH_IN_SECONDS; // 30 days for every login.
 }
 
 add_filter( 'auth_cookie_expiration', 'custom_auth_cookie_expiration' );
-</pre>
+```
 
 = What if a user has reached the limit but doesn't know which devices are active? =
 
@@ -150,19 +150,19 @@ Yes for the **Logout All** and **Block New** modes — both go through the stand
 
 Yes, since 3.1.0. Every command lives under `wp loggedin`:
 
-<pre>
+```bash
 # Sessions — <user> accepts an ID, username or email address.
-wp loggedin sessions list &lt;user&gt;              # Active sessions, newest first.
-wp loggedin sessions count &lt;user&gt;             # Just the number.
-wp loggedin sessions destroy &lt;user&gt;           # Sign the user out everywhere.
-wp loggedin sessions destroy &lt;user&gt; --token=&lt;hash&gt;   # Sign out one device.
+wp loggedin sessions list <user>              # Active sessions, newest first.
+wp loggedin sessions count <user>             # Just the number.
+wp loggedin sessions destroy <user>           # Sign the user out everywhere.
+wp loggedin sessions destroy <user> --token=<hash>   # Sign out one device.
 
 # Settings
 wp loggedin settings list                     # Every setting and its value.
 wp loggedin settings get maximum
 wp loggedin settings set maximum 3
 wp loggedin settings set logic block          # allow | logout_oldest | block
-</pre>
+```
 
 Destructive commands prompt for confirmation; pass `--yes` to skip it in scripts. `sessions list` supports the standard `--format`, `--fields` and `--field` flags, so `wp loggedin sessions list 42 --field=token` gives you clean input for a follow-up command. Run `wp help loggedin sessions` for the full reference.
 
@@ -180,11 +180,11 @@ No. The work Loggedin does on each login is one query for the user's existing se
 
 Yes, via the `loggedin_error_message` filter:
 
-<pre lang="php">
+```php
 add_filter( 'loggedin_error_message', function ( $message ) {
     return 'Your account is already signed in elsewhere. Sign out from another device to continue.';
 } );
-</pre>
+```
 
 See the [developer docs](https://docs.duckdev.com/loggedin/developer-docs) for every filter and action the plugin exposes.
 
