@@ -4,7 +4,7 @@ Tags: concurrent login, login limit, prevent account sharing, user sessions, for
 Donate link: https://paypal.me/JoelCJ
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 3.0.2
+Stable tag: 3.1.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -45,6 +45,7 @@ There's a one-click **Force Logout** panel in the admin to clear every session f
 * **Admin Force Logout** — Type a user ID, email, or username and clear every active session for that user in one click.
 * **Works with any session storage** — Uses the standard `WP_Session_Tokens` API. Stock WordPress, Redis, Memcached — all supported (the Logout Oldest mode needs the default user-meta storage; the other modes work everywhere).
 * **Customizable error message** — Override the message shown when a login is blocked, via a single filter.
+* **WP-CLI support** — Inspect and destroy user sessions and read or write settings from the command line: `wp loggedin sessions list <user>`, `wp loggedin sessions destroy <user>`, `wp loggedin settings set maximum 3`. Ideal for bulk operations, deploy scripts and headless installs.
 * **Built for developers** — Every decision passes through documented PHP hooks and filters. Override the cap per user / role / capability, exempt service accounts, audit force-logouts, or splice the plugin into your own auth pipeline. Full hook reference in the [developer docs](https://docs.duckdev.com/loggedin/developer-docs).
 * **Lightweight** — No cron, no background polling, no remote calls. The whole plugin runs at the moment a login happens.
 * **Translation-ready** — Loaded with the WordPress i18n APIs; contribute translations on WordPress.org.
@@ -145,6 +146,28 @@ Administrators can force-logout every session for the user from the dashboard:
 
 Yes for the **Logout All** and **Block New** modes — both go through the standard `WP_Session_Tokens` API, which respects whatever storage backend WordPress is configured to use. The **Logout Oldest** mode needs the default user-meta storage because the WP API doesn't expose a "drop the oldest" primitive; pick Logout All instead if your sessions live elsewhere.
 
+= Does Loggedin support WP-CLI? =
+
+Yes, since 3.1.0. Every command lives under `wp loggedin`:
+
+<pre>
+# Sessions — <user> accepts an ID, username or email address.
+wp loggedin sessions list &lt;user&gt;              # Active sessions, newest first.
+wp loggedin sessions count &lt;user&gt;             # Just the number.
+wp loggedin sessions destroy &lt;user&gt;           # Sign the user out everywhere.
+wp loggedin sessions destroy &lt;user&gt; --token=&lt;hash&gt;   # Sign out one device.
+
+# Settings
+wp loggedin settings list                     # Every setting and its value.
+wp loggedin settings get maximum
+wp loggedin settings set maximum 3
+wp loggedin settings set logic block          # allow | logout_oldest | block
+</pre>
+
+Destructive commands prompt for confirmation; pass `--yes` to skip it in scripts. `sessions list` supports the standard `--format`, `--fields` and `--field` flags, so `wp loggedin sessions list 42 --field=token` gives you clean input for a follow-up command. Run `wp help loggedin sessions` for the full reference.
+
+Listing sessions and destroying a single session read the session data directly and therefore need the default user-meta session storage; counting and destroying all sessions work on any storage backend.
+
 = Is Loggedin GDPR-compliant? =
 
 Loggedin stores no personal data itself. It only counts and manipulates WordPress session tokens that already exist in your database via the standard `WP_Session_Tokens` API. No external services are called, no telemetry is sent.
@@ -171,6 +194,14 @@ See the [developer docs](https://docs.duckdev.com/loggedin/developer-docs) for e
 2. **Force Logout** — admin Force Logout panel.
 
 == Changelog ==
+
+= 3.1.0 =
+* New: WP-CLI support — manage Loggedin from the command line with `wp loggedin sessions` (list, count, destroy) and `wp loggedin settings` (list, get, set). Run `wp help loggedin` for the full reference.
+* New: `wp loggedin sessions destroy <user> --token=<hash>` signs a user out of a single device instead of all of them.
+* New: `loggedin_cli_init` action so add-ons can register their own subcommands under the `wp loggedin` namespace.
+* New: `loggedin_destroy_session` action fired when an individual session is destroyed.
+* Improve: The CLI refuses to write a setting the sanitizer would reject, so a typo can no longer silently reset your login logic to the default.
+* Improve: CLI commands are only loaded on WP-CLI requests — a normal page load doesn't pay for them.
 
 = 3.0.2 =
 * New: Review-request notice restored, powered by the `duckdev/wp-review-notice` library and scoped to the Loggedin settings screen with a 7-day delay.
@@ -206,6 +237,9 @@ See the [developer docs](https://docs.duckdev.com/loggedin/developer-docs) for e
 For the full release history, see the [changelog](https://docs.duckdev.com/loggedin/changelog).
 
 == Upgrade Notice ==
+
+= 3.1.0 =
+Adds WP-CLI support — list, count and destroy user sessions and read or write plugin settings from the command line. No changes to existing behaviour.
 
 = 3.0.2 =
 Brings back the wp.org review prompt (now scoped to the Loggedin settings screen), migrates any prior dismiss state so existing users are not re-prompted, and tightens the admin layout so notices sit inside the page column.

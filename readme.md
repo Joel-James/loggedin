@@ -16,6 +16,7 @@ Loggedin enforces a per-account session limit across every device a user signs i
 - **Force-logout tool** — terminate every active session for any user from the admin UI.
 - **Modern settings UI** — built with `@wordpress/components` and Gutenberg patterns, not a hand-rolled options page.
 - **REST-backed** — all settings flow through the WordPress REST API.
+- **WP-CLI commands** — inspect and destroy sessions and read/write settings from the shell; see [WP-CLI](#wp-cli).
 - **Extensible** — addons hook into the settings UI via the `loggedin.settings.panels` JS filter and into the bootstrap via the `loggedin_init` action.
 - **Privacy-respecting** — no third-party calls beyond Freemius for licensed addons.
 
@@ -51,6 +52,31 @@ npm install && npm run build
 ```
 
 Then symlink or copy the directory into wp-content/plugins/ and activate.
+
+## WP-CLI
+
+Commands are registered only on WP-CLI requests, so they cost a normal page load nothing.
+
+```bash
+# Sessions — <user> accepts an ID, username or email address.
+wp loggedin sessions list <user>                    # active sessions, newest first
+wp loggedin sessions list <user> --field=token      # token hashes only
+wp loggedin sessions count <user>
+wp loggedin sessions destroy <user> --yes           # sign out everywhere
+wp loggedin sessions destroy <user> --token=<hash>  # sign out one device
+
+# Settings
+wp loggedin settings list
+wp loggedin settings get maximum
+wp loggedin settings set maximum 3
+wp loggedin settings set logic block                # allow | logout_oldest | block
+```
+
+`sessions list` supports the standard `--format`, `--fields` and `--field` flags. Destructive commands prompt unless `--yes` is passed, and `settings set` refuses a value the sanitizer would reject rather than silently storing the default.
+
+Listing and single-session destroys read the token store directly and need the default user-meta session storage; `count` and full destroys work with any backend.
+
+Add-ons can register subcommands under the same namespace on the `loggedin_cli_init` action.
 
 ## Development
 
