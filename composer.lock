@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17556b306b3ac3572a68529f30b0d180",
+    "content-hash": "d02856295772684c4dacb7a71ff8d360",
     "packages": [
         {
             "name": "duckdev/freemius-plugin-licensing",
