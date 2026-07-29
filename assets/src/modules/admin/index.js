@@ -60,10 +60,7 @@ const AdminApp = () => {
 	return (
 		<>
 			<PageHeader
-				title={ __(
-					'Loggedin – Limit Concurrent Sessions',
-					'loggedin'
-				) }
+				title={ __( 'Loggedin – Session Manager', 'loggedin' ) }
 			>
 				<TabNav
 					current={ current }

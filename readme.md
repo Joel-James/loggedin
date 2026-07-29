@@ -1,4 +1,4 @@
-# Loggedin — Limit Concurrent Sessions
+# Loggedin — Session Manager, Limit Concurrent Logins & Force Logout
 
 Prevent account sharing on WordPress by capping how many places a user can be logged in at once.
 

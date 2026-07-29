@@ -1,4 +1,4 @@
-=== Loggedin - Limit Concurrent Sessions ===
+=== Loggedin - Session Manager, Limit Concurrent Logins & Force Logout ===
 Contributors: joelcj91,duckdev
 Tags: concurrent login, login limit, prevent account sharing, user sessions, force logout
 Donate link: https://paypal.me/JoelCJ
@@ -185,6 +185,7 @@ See the [developer docs](https://docs.duckdev.com/loggedin/developer-docs) for e
 * New: `wp loggedin sessions destroy <user> --token=<hash>` signs a user out of a single device instead of all of them.
 * New: `loggedin_cli_init` action so add-ons can register their own subcommands under the `wp loggedin` namespace.
 * New: `loggedin_destroy_session` action fired when an individual session is destroyed.
+* Improve: Renamed to "Loggedin - Session Manager, Limit Concurrent Logins & Force Logout" to reflect the plugin's broader scope. Nothing about the concurrent-login limiting has changed — same settings, same behaviour, same plugin.
 * Improve: The CLI refuses to write a setting the sanitizer would reject, so a typo can no longer silently reset your login logic to the default.
 * Improve: CLI commands are only loaded on WP-CLI requests — a normal page load doesn't pay for them.
 

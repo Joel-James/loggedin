@@ -17,7 +17,7 @@
  * @license           GPL-2.0+
  *
  * @wordpress-plugin
- * Plugin Name:       Loggedin - Limit Concurrent Sessions
+ * Plugin Name:       Loggedin - Session Manager, Limit Concurrent Logins & Force Logout
  * Plugin URI:        https://duckdev.com/products/loggedin-limit-active-logins/
  * Description:       Limit an account to a specific number of simultaneous logins across all devices.
  * Version:           3.1.0
