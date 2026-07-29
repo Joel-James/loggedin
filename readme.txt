@@ -212,25 +212,9 @@ See the [developer docs](https://docs.duckdev.com/loggedin/developer-docs) for e
 * Improve: Comprehensive sanitisation pass across every input and option write path.
 * Improve: PHP 7.4 is now the minimum supported version.
 
-= 2.0.4 =
-* Improve: Review-notice scheduling now respects the dismiss state on every admin page load.
-* Fix: Invalid nonce action prevented review notices from being dismissed.
-
-= 2.0.3 =
-* Improve: Removed leftover debug code that shipped accidentally in 2.0.2.
-
 For the full release history, see the [changelog](https://docs.duckdev.com/loggedin/changelog).
 
 == Upgrade Notice ==
 
 = 3.1.0 =
 Adds WP-CLI support — list, count and destroy user sessions and read or write plugin settings from the command line. No changes to existing behaviour.
-
-= 3.0.2 =
-Brings back the wp.org review prompt (now scoped to the Loggedin settings screen), migrates any prior dismiss state so existing users are not re-prompted, and tightens the admin layout so notices sit inside the page column.
-
-= 3.0.1 =
-A maintenance release that fixes the v2→v3 settings migration and adds the JS extension points the new Active Sessions addon hooks into.
-
-= 3.0.0 =
-A major release with a brand-new React admin, REST API, add-ons catalogue with in-dashboard license management and a documented hook surface. Back up your database before updating.
