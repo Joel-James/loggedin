@@ -64,6 +64,7 @@ Extend Loggedin with these official [add-ons](https://duckdev.com/addons/loggedi
 * [Getting started](https://docs.duckdev.com/loggedin/getting-started)
 * [General settings](https://docs.duckdev.com/loggedin/general-settings)
 * [Force Logout (Manage Sessions)](https://docs.duckdev.com/loggedin/manage-sessions)
+* [WP-CLI commands](https://docs.duckdev.com/loggedin/wp-cli)
 * [Add-ons overview](https://docs.duckdev.com/loggedin/addons/)
 * [Developer docs — hooks, filters, REST](https://docs.duckdev.com/loggedin/developer-docs)
 
@@ -148,25 +149,9 @@ Yes for the **Logout All** and **Block New** modes — both go through the stand
 
 = Does Loggedin support WP-CLI? =
 
-Yes, since 3.1.0. Every command lives under `wp loggedin`:
+Yes, since 3.1.0. Every command lives under `wp loggedin` — `wp loggedin sessions` lists, counts and destroys a user's active sessions, and `wp loggedin settings` reads and writes the plugin settings. Destructive commands prompt for confirmation unless you pass `--yes`.
 
-```bash
-# Sessions — <user> accepts an ID, username or email address.
-wp loggedin sessions list <user>              # Active sessions, newest first.
-wp loggedin sessions count <user>             # Just the number.
-wp loggedin sessions destroy <user>           # Sign the user out everywhere.
-wp loggedin sessions destroy <user> --token=<hash>   # Sign out one device.
-
-# Settings
-wp loggedin settings list                     # Every setting and its value.
-wp loggedin settings get maximum
-wp loggedin settings set maximum 3
-wp loggedin settings set logic block          # allow | logout_oldest | block
-```
-
-Destructive commands prompt for confirmation; pass `--yes` to skip it in scripts. `sessions list` supports the standard `--format`, `--fields` and `--field` flags, so `wp loggedin sessions list 42 --field=token` gives you clean input for a follow-up command. Run `wp help loggedin sessions` for the full reference.
-
-Listing sessions and destroying a single session read the session data directly and therefore need the default user-meta session storage; counting and destroying all sessions work on any storage backend.
+See the [WP-CLI documentation](https://docs.duckdev.com/loggedin/wp-cli) for the full command reference, options and scripting examples, or run `wp help loggedin` in your terminal.
 
 = Is Loggedin GDPR-compliant? =
 
