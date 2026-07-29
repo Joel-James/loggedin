@@ -1,6 +1,6 @@
 === Loggedin - Session Manager, Limit Concurrent Logins & Force Logout ===
 Contributors: joelcj91,duckdev
-Tags: concurrent login, login limit, prevent account sharing, user sessions, force logout
+Tags: concurrent login, login limit, prevent account sharing, session management, force logout
 Donate link: https://paypal.me/JoelCJ
 Requires at least: 6.0
 Tested up to: 7.0
@@ -9,11 +9,13 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Limit concurrent user logins in WordPress, stop account sharing, force logout active sessions, and pick what happens when the cap is hit.
+WordPress session manager — limit concurrent user logins, stop account sharing, force logout active sessions, and manage every signed-in device.
 
 == Description ==
 
-**Loggedin** caps the number of simultaneous WordPress sessions a user account is allowed to hold. When the cap is reached, you choose what happens next — log out the oldest device, log out every other device, or block the new login outright. It's the lightweight, no-bloat way to stop account sharing on membership sites, LMS courses, paid communities, and any WordPress install where one paid account shouldn't be open on five devices at once.
+**Loggedin** is a session manager for WordPress — it gives you control over the login sessions your users hold, and the tools to end them when you need to.
+
+At its core, Loggedin caps the number of simultaneous WordPress sessions a user account is allowed to hold. When the cap is reached, you choose what happens next — log out the oldest device, log out every other device, or block the new login outright. It's the lightweight, no-bloat way to stop account sharing on membership sites, LMS courses, paid communities, and any WordPress install where one paid account shouldn't be open on five devices at once.
 
 The plugin hooks straight into WordPress's standard authentication pipeline and uses the native `WP_Session_Tokens` API, so it works on every host, with every theme, and alongside every login plugin you might already run. No cron jobs, no background polling, no third-party services.
 
@@ -40,6 +42,7 @@ There's a one-click **Force Logout** panel in the admin to clear every session f
 
 ### Features
 
+* **Session management from the dashboard** — Inspect and end user sessions from **Users → Loggedin**, or from WP-CLI. Add the Active Sessions add-on for a live, sortable view of every signed-in user and device.
 * **Global concurrent-login limit** — Pick any number from 1 upwards as the per-user cap.
 * **Three built-in modes** — Logout Oldest (kick the user's oldest device, keep the rest), Logout All (the new login becomes the only active session), or Block New (reject the login and show an error on wp-login).
 * **Admin Force Logout** — Type a user ID, email, or username and clear every active session for that user in one click.
@@ -63,7 +66,7 @@ Extend Loggedin with these official [add-ons](https://duckdev.com/addons/loggedi
 
 * [Getting started](https://docs.duckdev.com/loggedin/getting-started)
 * [General settings](https://docs.duckdev.com/loggedin/general-settings)
-* [Force Logout (Manage Sessions)](https://docs.duckdev.com/loggedin/manage-sessions)
+* [Force Logout (Manage Sessions)](https://docs.duckdev.com/loggedin/force-logout)
 * [WP-CLI commands](https://docs.duckdev.com/loggedin/wp-cli)
 * [Add-ons overview](https://docs.duckdev.com/loggedin/addons/)
 * [Developer docs — hooks, filters, REST](https://docs.duckdev.com/loggedin/developer-docs)
@@ -83,6 +86,18 @@ _GitHub is for bug reports and development-related issues only. For end-user sup
 That's it. The default — limit of `1`, **Logout All** mode — already prevents account sharing on a fresh install.
 
 == Frequently Asked Questions ==
+
+= Is Loggedin a full session manager? =
+
+It manages the sessions WordPress already creates, rather than replacing WordPress's session handling. Here's exactly what's in the free plugin:
+
+* **Limit** how many sessions an account can hold at once, and choose what happens when the limit is reached.
+* **Force logout** every session for any user, from the admin or from WP-CLI.
+* **Inspect** a user's active sessions — login time, expiry, IP and device — via `wp loggedin sessions list`.
+
+For a live, sortable view of every signed-in user across the site, with per-device detail and one-click sign-out, add the [Active Sessions](https://duckdev.com/addon/loggedin-active-sessions/) add-on. Idle timeouts and login alerts are on the roadmap as add-ons too.
+
+If all you need is to cap concurrent logins and stop account sharing, the free plugin does that on its own — no add-on required.
 
 = Will this stop users from sharing their WordPress password? =
 
