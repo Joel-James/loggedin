@@ -17,6 +17,8 @@
  *      requests don't pay for them unless a REST endpoint asks.
  *   5. {@see api()} — REST controllers. Always loaded; they only
  *      register routes on `rest_api_init`.
+ *   6. {@see cli()} — WP-CLI commands. Only wired on CLI requests, so
+ *      web traffic never loads the command classes.
  *
  * The `loggedin_init` action fires once boot completes so add-ons can
  * register their own modules with the same lifecycle.
@@ -34,6 +36,7 @@ use DuckDev\Loggedin\Admin\Assets;
 use DuckDev\Loggedin\Api\Addons as Addons_Api;
 use DuckDev\Loggedin\Api\Sessions as Sessions_Api;
 use DuckDev\Loggedin\Api\Settings as Settings_Api;
+use DuckDev\Loggedin\Cli\Commands;
 use DuckDev\Loggedin\Contracts\Singleton;
 use DuckDev\Loggedin\Front\Session_Guard;
 use DuckDev\Loggedin\Setup\Settings;
@@ -63,6 +66,7 @@ final class Core {
 		$this->admin();
 		$this->addons();
 		$this->api();
+		$this->cli();
 
 		/**
 		 * Fires once every module has been wired up.
@@ -127,5 +131,18 @@ final class Core {
 		Settings_Api::instance();
 		Addons_Api::instance();
 		Sessions_Api::instance();
+	}
+
+	/**
+	 * WP-CLI commands.
+	 *
+	 * Gated on the `WP_CLI` constant so the command classes are never
+	 * autoloaded on a web request — the CLI surface costs a stock
+	 * install exactly nothing.
+	 */
+	private function cli(): void {
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			Commands::instance();
+		}
 	}
 }
