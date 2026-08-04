@@ -3,7 +3,7 @@
  * Addons module — Freemius wiring + license operations.
  *
  * This module is the bridge between the plugin and the
- * `duckdev/freemius-plugin-licensing` SDK. It owns:
+ * `foxelabs/wp-freemius-client` SDK. It owns:
  *
  *   - Building Freemius instances for the parent plugin and each
  *     registered addon (lazily — see {@see maybe_init_freemius()}).
@@ -21,7 +21,7 @@ declare( strict_types = 1 );
 
 namespace DuckDev\Loggedin\Addons;
 
-use DuckDev\Freemius\Freemius;
+use FoxeLabs\Freemius\Freemius;
 use DuckDev\Loggedin\Contracts\Singleton;
 use DuckDev\Loggedin\Plugin;
 use WP_Error;

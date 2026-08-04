@@ -22,6 +22,7 @@ namespace DuckDev\Loggedin\Setup;
 
 use DuckDev\Loggedin\Contracts\Singleton;
 use DuckDev\Loggedin\Plugin;
+use FoxeLabs\Freemius\Storage\ActivationRepository;
 
 defined( 'WPINC' ) || die;
 
@@ -74,6 +75,10 @@ final class Upgrader {
 		// Move the pre-library review-notice state onto the keys
 		// `duckdev/wp-review-notice` expects.
 		$this->migrate_review_notice_keys();
+
+		// Move license activations onto the key the rebranded
+		// `foxelabs/wp-freemius-client` reads.
+		$this->migrate_freemius_activation_data();
 
 		update_option( Plugin::VERSION_KEY, Plugin::VERSION );
 	}
@@ -135,6 +140,69 @@ final class Upgrader {
 			array( 'meta_key' => 'loggedin_rating_notice_dismissed' )
 		);
 		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+	}
+
+	/**
+	 * Move Freemius activations onto the rebranded option key.
+	 *
+	 * The licensing library was renamed from
+	 * `duckdev/freemius-plugin-licensing` to
+	 * `foxelabs/wp-freemius-client` in its 3.0.0 release, and the
+	 * option holding every activation moved with it:
+	 *   - `duckdev_freemius_activation_data` (2.x)
+	 *   - `foxelabs_freemius_activation_data` (3.x)
+	 *
+	 * The library deliberately performs no writes of its own, so the
+	 * rename is ours to handle. Without this, the SDK reads an empty
+	 * option and every license silently reports as inactive —
+	 * premium update delivery stops and the addons screen shows the
+	 * activation form again, with no error to explain why.
+	 *
+	 * The stored shape (activations keyed by Freemius plugin id) did
+	 * not change, so a straight copy is enough.
+	 *
+	 * Ordering matters: `Core::common()` boots us before
+	 * `Core::addons()`, and `Addons` defers `Freemius::get_instance()`
+	 * until `admin_init` or the first read, so this always lands
+	 * before anything reads an activation.
+	 *
+	 * The addon cache transients (`duckdev_freemius_{id}_*`) are
+	 * intentionally left alone — they hold nothing but a 24-hour
+	 * cache of the addon catalogue, repopulate on the next API call,
+	 * and WordPress expires the stale rows itself.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @return void
+	 */
+	protected function migrate_freemius_activation_data(): void {
+		$legacy = get_option( 'duckdev_freemius_activation_data', null );
+
+		// Fresh install, or an upgrade that already ran this.
+		if ( ! is_array( $legacy ) || empty( $legacy ) ) {
+			return;
+		}
+
+		// Never clobber a live activation. If the new key already
+		// holds data, this site activated after upgrading and the
+		// stale 2.x copy would roll that back.
+		$current = get_option( ActivationRepository::OPTION_KEY, null );
+
+		if ( is_array( $current ) && ! empty( $current ) ) {
+			delete_option( 'duckdev_freemius_activation_data' );
+
+			return;
+		}
+
+		// Drop the source only once the destination is written — a
+		// failed write here would otherwise lose the activation for
+		// good. Deliberately the options API and not a direct
+		// `UPDATE wp_options SET option_name`: raw SQL bypasses the
+		// options cache and any persistent object cache, so a cached
+		// read could resurrect the old value.
+		if ( update_option( ActivationRepository::OPTION_KEY, $legacy ) ) {
+			delete_option( 'duckdev_freemius_activation_data' );
+		}
 	}
 
 	/**

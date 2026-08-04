@@ -23,7 +23,7 @@
   },
   "require": {
     "php": ">=7.4",
-    "duckdev/freemius-plugin-licensing": "^2.0.1",
+    "foxelabs/wp-freemius-client": "^3.0",
     "duckdev/wp-review-notice": "^2.0"
   },
   "require-dev": {
