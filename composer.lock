@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfa60bca0a57a73f8e68c36de29ed4a0",
+    "content-hash": "3545c0103eed1c5472bf9e2e8d849ff8",
     "packages": [
         {
             "name": "foxelabs/wp-freemius-client",
