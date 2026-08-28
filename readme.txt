@@ -196,9 +196,9 @@ See the [developer docs](https://docs.foxelabs.com/software/loggedin/developer-d
 == Changelog ==
 
 = 3.2.0 =
-* Improve: Loggedin is now published under the Foxe Labs brand. Product pages moved to foxelabs.com and the documentation to docs.foxelabs.com — every link in the plugin points at the new home. Nothing about how the plugin works has changed.
-* Improve: License activations are carried over to the rebranded storage key automatically, so premium add-ons stay licensed across the upgrade with no re-activation.
-* Improve: The PHP namespace moved from `DuckDev\Loggedin\` to `FoxeLabs\Loggedin\`. The old class name is kept as an alias, so add-ons and custom code written against it keep working while you update.
+* Improve: Faster settings reads — the plugin's settings are now built once per request instead of on every read, cutting repeat work on each login and admin page load.
+* Improve: Loggedin is now published under the Foxe Labs brand. Nothing about how the plugin works has changed.
+* Improve: Updated every link in the plugin to the new foxelabs.com product pages and docs.foxelabs.com documentation.
 * Compat: Tested with WordPress 7.1.
 
 = 3.1.0 =

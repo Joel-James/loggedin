@@ -52,6 +52,25 @@ final class Settings {
 	private const ALLOWED_LOGICS = array( 'allow', 'logout_oldest', 'block' );
 
 	/**
+	 * Memoized result of {@see self::all()} for this request.
+	 *
+	 * `all()` is on the hot path — the session guard reads a setting
+	 * two or three times per login, and every read re-ran the
+	 * `loggedin_settings_defaults` filter and rebuilt the merged
+	 * array. `get_option()` itself is cached by WordPress, but the
+	 * filter dispatch and the merge were not.
+	 *
+	 * `null` means "not yet built". An empty array is a legitimate
+	 * cached value, so the check is against `null` rather than
+	 * `empty()`.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @var array<string, mixed>|null
+	 */
+	private $cache = null;
+
+	/**
 	 * Register hooks.
 	 *
 	 * @since 3.0.0
@@ -62,6 +81,38 @@ final class Settings {
 		// `show_in_rest` schema at REST controller boot, which fires
 		// outside the admin context.
 		add_action( 'init', array( $this, 'register' ) );
+
+		// Drop the memoized copy whenever the option changes, on
+		// every write path — our own `update()`, the REST route at
+		// `/wp/v2/settings`, WP-CLI, or a plain `update_option()`
+		// from site code. Hooking the option-specific actions means
+		// we catch all of them without caring who did the writing.
+		$option = Plugin::OPTION_KEY;
+		add_action( "add_option_{$option}", array( $this, 'flush' ) );
+		add_action( "update_option_{$option}", array( $this, 'flush' ) );
+		add_action( "delete_option_{$option}", array( $this, 'flush' ) );
+
+		// Add-ons register their `loggedin_settings_defaults` filters
+		// while booting on `loggedin_init`. Anything cached before
+		// that point was built without them, so drop it once boot
+		// finishes rather than serving defaults an add-on has since
+		// changed.
+		add_action( 'loggedin_init', array( $this, 'flush' ) );
+	}
+
+	/**
+	 * Discard the memoized settings for this request.
+	 *
+	 * Public because it is wired to option hooks, but also useful to
+	 * call directly after writing the option through a path that
+	 * bypasses the options API.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @return void
+	 */
+	public function flush(): void {
+		$this->cache = null;
 	}
 
 	/**
@@ -106,13 +157,19 @@ final class Settings {
 	 * @return array<string, mixed>
 	 */
 	public function all(): array {
+		if ( null !== $this->cache ) {
+			return $this->cache;
+		}
+
 		$stored = get_option( Plugin::OPTION_KEY, array() );
 
 		if ( ! is_array( $stored ) ) {
 			$stored = array();
 		}
 
-		return array_merge( $this->defaults(), $stored );
+		$this->cache = array_merge( $this->defaults(), $stored );
+
+		return $this->cache;
 	}
 
 	/**
