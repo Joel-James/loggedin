@@ -14,23 +14,23 @@
  *     (link rendered by addon code or admin pages outside this
  *     plugin).
  *   - The review-request notice (delegated to the
- *     `duckdev/wp-review-notice` library and scoped to the plugin
+ *     `foxelabs/wp-review-notice` library and scoped to the plugin
  *     settings screen).
  *
  * Asset enqueueing for the React bundle lives in a sibling class —
  * {@see Assets} — so this file doesn't have to know how the bundle
  * is built or what dependencies it declares.
  *
- * @package DuckDev\Loggedin\Admin
+ * @package FoxeLabs\Loggedin\Admin
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Admin;
+namespace FoxeLabs\Loggedin\Admin;
 
-use DuckDev\Loggedin\Contracts\Singleton;
-use DuckDev\Loggedin\Plugin;
-use DuckDev\Reviews\Notice as Review_Notice;
+use FoxeLabs\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Plugin;
+use FoxeLabs\Reviews\Notice as Review_Notice;
 use WP_Session_Tokens;
 
 defined( 'WPINC' ) || die;

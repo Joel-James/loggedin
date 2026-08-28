@@ -1,10 +1,10 @@
 === Loggedin - Session Manager, Limit Concurrent Logins & Force Logout ===
-Contributors: joelcj91,duckdev
+Contributors: joelcj91,foxelabs
 Tags: concurrent login, login limit, prevent account sharing, session management, force logout
 Donate link: https://paypal.me/JoelCJ
 Requires at least: 6.0
-Tested up to: 7.0
-Stable tag: 3.1.0
+Tested up to: 7.1
+Stable tag: 3.2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -49,27 +49,27 @@ There's a one-click **Force Logout** panel in the admin to clear every session f
 * **Works with any session storage** — Uses the standard `WP_Session_Tokens` API. Stock WordPress, Redis, Memcached — all supported (the Logout Oldest mode needs the default user-meta storage; the other modes work everywhere).
 * **Customizable error message** — Override the message shown when a login is blocked, via a single filter.
 * **WP-CLI support** — Inspect and destroy user sessions and read or write settings from the command line: `wp loggedin sessions list <user>`, `wp loggedin sessions destroy <user>`, `wp loggedin settings set maximum 3`. Ideal for bulk operations, deploy scripts and headless installs.
-* **Built for developers** — Every decision passes through documented PHP hooks and filters. Override the cap per user / role / capability, exempt service accounts, audit force-logouts, or splice the plugin into your own auth pipeline. Full hook reference in the [developer docs](https://docs.duckdev.com/loggedin/developer-docs).
+* **Built for developers** — Every decision passes through documented PHP hooks and filters. Override the cap per user / role / capability, exempt service accounts, audit force-logouts, or splice the plugin into your own auth pipeline. Full hook reference in the [developer docs](https://docs.foxelabs.com/software/loggedin/developer-docs).
 * **Lightweight** — No cron, no background polling, no remote calls. The whole plugin runs at the moment a login happens.
 * **Translation-ready** — Loaded with the WordPress i18n APIs; contribute translations on WordPress.org.
 
 ### 📦 Add-ons
 
-Extend Loggedin with these official [add-ons](https://duckdev.com/addons/loggedin/):
+Extend Loggedin with these official [add-ons](https://foxelabs.com/software/plugins/loggedin):
 
-* **[Active Sessions](https://duckdev.com/addon/loggedin-active-sessions/)** — See exactly who's signed in right now, drill into each device per user, and sign out a single session — or every session — in one click.
-* **[Limit Per User](https://duckdev.com/addon/limit-per-user/)** — Override the global session cap for an individual user account directly from their WordPress profile. Perfect for tiered access or trusted-staff exemptions.
-* **[Limit Per Role](https://duckdev.com/addon/limit-per-role/)** — Set a different concurrent-session cap per WordPress role. Give administrators more headroom while keeping subscribers tight, or vice versa.
-* **[Real-time Logout](https://duckdev.com/addon/real-time-logout/)** — Detect logouts in near-real-time. When Loggedin terminates a session, the user's other open tabs reload to wp-login automatically — no waiting for the next page click.
+* **[Active Sessions](https://foxelabs.com/software/plugins/loggedin/active-sessions)** — See exactly who's signed in right now, drill into each device per user, and sign out a single session — or every session — in one click.
+* **[Limit Per User](https://foxelabs.com/software/plugins/loggedin/limit-per-user)** — Override the global session cap for an individual user account directly from their WordPress profile. Perfect for tiered access or trusted-staff exemptions.
+* **[Limit Per Role](https://foxelabs.com/software/plugins/loggedin/limit-per-role)** — Set a different concurrent-session cap per WordPress role. Give administrators more headroom while keeping subscribers tight, or vice versa.
+* **[Real-time Logout](https://foxelabs.com/software/plugins/loggedin/realtime-logout)** — Detect logouts in near-real-time. When Loggedin terminates a session, the user's other open tabs reload to wp-login automatically — no waiting for the next page click.
 
 ### 📚 Documentation
 
-* [Getting started](https://docs.duckdev.com/loggedin/getting-started)
-* [General settings](https://docs.duckdev.com/loggedin/general-settings)
-* [Force Logout (Manage Sessions)](https://docs.duckdev.com/loggedin/force-logout)
-* [WP-CLI commands](https://docs.duckdev.com/loggedin/wp-cli)
-* [Add-ons overview](https://docs.duckdev.com/loggedin/addons/)
-* [Developer docs — hooks, filters, REST](https://docs.duckdev.com/loggedin/developer-docs)
+* [Getting started](https://docs.foxelabs.com/software/loggedin/getting-started)
+* [General settings](https://docs.foxelabs.com/software/loggedin/general-settings)
+* [Force Logout (Manage Sessions)](https://docs.foxelabs.com/software/loggedin/force-logout)
+* [WP-CLI commands](https://docs.foxelabs.com/software/loggedin/wp-cli)
+* [Add-ons overview](https://docs.foxelabs.com/software/loggedin/addons/)
+* [Developer docs — hooks, filters, REST](https://docs.foxelabs.com/software/loggedin/developer-docs)
 
 ### 🐛 Bug reports
 
@@ -79,7 +79,7 @@ _GitHub is for bug reports and development-related issues only. For end-user sup
 
 == Installation ==
 
-1. Install Loggedin from the WordPress.org plugin directory (**Plugins → Add New → search "Loggedin"**) or upload the ZIP under **Plugins → Add New → Upload Plugin**. Full instructions: [how to install a plugin](https://docs.duckdev.com/general/installing-plugin).
+1. Install Loggedin from the WordPress.org plugin directory (**Plugins → Add New → search "Loggedin"**) or upload the ZIP under **Plugins → Add New → Upload Plugin**. Full instructions: [how to install a plugin](https://wordpress.org/documentation/article/manage-plugins/).
 2. Activate the plugin.
 3. Go to **Users → Loggedin** to configure the concurrent-login limit and pick the rule applied when the limit is reached.
 
@@ -95,7 +95,7 @@ It manages the sessions WordPress already creates, rather than replacing WordPre
 * **Force logout** every session for any user, from the admin or from WP-CLI.
 * **Inspect** a user's active sessions — login time, expiry, IP and device — via `wp loggedin sessions list`.
 
-For a live, sortable view of every signed-in user across the site, with per-device detail and one-click sign-out, add the [Active Sessions](https://duckdev.com/addon/loggedin-active-sessions/) add-on. Idle timeouts and login alerts are on the roadmap as add-ons too.
+For a live, sortable view of every signed-in user across the site, with per-device detail and one-click sign-out, add the [Active Sessions](https://foxelabs.com/software/plugins/loggedin/active-sessions) add-on. Idle timeouts and login alerts are on the roadmap as add-ons too.
 
 If all you need is to cap concurrent logins and stop account sharing, the free plugin does that on its own — no add-on required.
 
@@ -109,11 +109,11 @@ Yes. Loggedin hooks into the standard WordPress authentication pipeline (`wp_aut
 
 = Can I set different limits for administrators and subscribers? =
 
-Yes, with the official [Limit Per Role add-on](https://duckdev.com/addon/limit-per-role/). It adds a per-role panel to the settings page where you can give each WordPress role its own cap (e.g. administrators: 5, editors: 3, subscribers: 1). Users with multiple roles get the highest configured limit.
+Yes, with the official [Limit Per Role add-on](https://foxelabs.com/software/plugins/loggedin/limit-per-role). It adds a per-role panel to the settings page where you can give each WordPress role its own cap (e.g. administrators: 5, editors: 3, subscribers: 1). Users with multiple roles get the highest configured limit.
 
 = Can I set a different limit for one specific user? =
 
-Yes, with the official [Limit Per User add-on](https://duckdev.com/addon/limit-per-user/). It adds a field to the WordPress profile screen so you can override the global cap on a per-user basis — useful for shared editorial accounts, executive users, or anyone who legitimately needs more sessions than your default.
+Yes, with the official [Limit Per User add-on](https://foxelabs.com/software/plugins/loggedin/limit-per-user). It adds a field to the WordPress profile screen so you can override the global cap on a per-user basis — useful for shared editorial accounts, executive users, or anyone who legitimately needs more sessions than your default.
 
 = Will current users be logged out when I install or change the limit? =
 
@@ -131,7 +131,7 @@ The plugin offers three built-in modes:
 * **Logout All** — When the limit is reached, every other active session for the user is terminated and the new login becomes the only active session.
 * **Block New** — When the limit is reached, the new login attempt is rejected with an error on wp-login.
 
-Additional modes can be added via the `loggedin_logics` filter. See the [General Settings docs](https://docs.duckdev.com/loggedin/general-settings#login-logic) for details.
+Additional modes can be added via the `loggedin_logics` filter. See the [General Settings docs](https://docs.foxelabs.com/software/loggedin/general-settings#login-logic) for details.
 
 = How long does a login session last? =
 
@@ -166,7 +166,7 @@ Yes for the **Logout All** and **Block New** modes — both go through the stand
 
 Yes, since 3.1.0. Every command lives under `wp loggedin` — `wp loggedin sessions` lists, counts and destroys a user's active sessions, and `wp loggedin settings` reads and writes the plugin settings. Destructive commands prompt for confirmation unless you pass `--yes`.
 
-See the [WP-CLI documentation](https://docs.duckdev.com/loggedin/wp-cli) for the full command reference, options and scripting examples, or run `wp help loggedin` in your terminal.
+See the [WP-CLI documentation](https://docs.foxelabs.com/software/loggedin/wp-cli) for the full command reference, options and scripting examples, or run `wp help loggedin` in your terminal.
 
 = Is Loggedin GDPR-compliant? =
 
@@ -186,7 +186,7 @@ add_filter( 'loggedin_error_message', function ( $message ) {
 } );
 ```
 
-See the [developer docs](https://docs.duckdev.com/loggedin/developer-docs) for every filter and action the plugin exposes.
+See the [developer docs](https://docs.foxelabs.com/software/loggedin/developer-docs) for every filter and action the plugin exposes.
 
 == Screenshots ==
 
@@ -194,6 +194,12 @@ See the [developer docs](https://docs.duckdev.com/loggedin/developer-docs) for e
 2. **Force Logout** — admin Force Logout panel.
 
 == Changelog ==
+
+= 3.2.0 =
+* Improve: Loggedin is now published under the Foxe Labs brand. Product pages moved to foxelabs.com and the documentation to docs.foxelabs.com — every link in the plugin points at the new home. Nothing about how the plugin works has changed.
+* Improve: License activations are carried over to the rebranded storage key automatically, so premium add-ons stay licensed across the upgrade with no re-activation.
+* Improve: The PHP namespace moved from `DuckDev\Loggedin\` to `FoxeLabs\Loggedin\`. The old class name is kept as an alias, so add-ons and custom code written against it keep working while you update.
+* Compat: Tested with WordPress 7.1.
 
 = 3.1.0 =
 * New: WP-CLI support — manage Loggedin from the command line with `wp loggedin sessions` (list, count, destroy) and `wp loggedin settings` (list, get, set). Run `wp help loggedin` for the full reference.
@@ -228,7 +234,7 @@ See the [developer docs](https://docs.duckdev.com/loggedin/developer-docs) for e
 * Improve: Comprehensive sanitisation pass across every input and option write path.
 * Improve: PHP 7.4 is now the minimum supported version.
 
-For the full release history, see the [changelog](https://docs.duckdev.com/loggedin/changelog).
+For the full release history, see the [changelog](https://docs.foxelabs.com/software/loggedin/changelog).
 
 == Upgrade Notice ==
 

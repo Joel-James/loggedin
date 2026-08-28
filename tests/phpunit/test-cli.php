@@ -8,14 +8,14 @@
  * touch in a non-CLI context, because a fatal here would take down
  * every request on the site, not just `wp` invocations.
  *
- * @package DuckDev\Loggedin
+ * @package FoxeLabs\Loggedin
  */
 
 declare( strict_types = 1 );
 
-use DuckDev\Loggedin\Cli\Commands;
-use DuckDev\Loggedin\Cli\Sessions_Command;
-use DuckDev\Loggedin\Cli\Settings_Command;
+use FoxeLabs\Loggedin\Cli\Commands;
+use FoxeLabs\Loggedin\Cli\Sessions_Command;
+use FoxeLabs\Loggedin\Cli\Settings_Command;
 
 /**
  * @group cli

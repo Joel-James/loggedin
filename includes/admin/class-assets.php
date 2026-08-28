@@ -10,15 +10,15 @@
  * plugin only has one admin page — but the screen check is centralised
  * here so adding a second page later is a one-line constant change.
  *
- * @package DuckDev\Loggedin\Admin
+ * @package FoxeLabs\Loggedin\Admin
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Admin;
+namespace FoxeLabs\Loggedin\Admin;
 
-use DuckDev\Loggedin\Contracts\Singleton;
-use DuckDev\Loggedin\Plugin;
+use FoxeLabs\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Plugin;
 
 defined( 'WPINC' ) || die;
 

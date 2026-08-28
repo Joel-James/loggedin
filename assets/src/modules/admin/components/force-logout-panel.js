@@ -60,7 +60,7 @@ const DefaultCrossSell = () => (
 					'loggedin'
 				) }{ ' ' }
 				<a
-					href="https://duckdev.com/addon/loggedin-active-sessions/"
+					href="https://foxelabs.com/software/plugins/loggedin/active-sessions"
 					target="_blank"
 					rel="noreferrer"
 				>

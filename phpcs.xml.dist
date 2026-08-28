@@ -42,8 +42,8 @@
 		<properties>
 			<property name="prefixes" type="array">
 				<element value="loggedin"/>
-				<element value="duckdev_loggedin"/>
-				<element value="DuckDev\Loggedin"/>
+				<element value="foxelabs_loggedin"/>
+				<element value="FoxeLabs\Loggedin"/>
 			</property>
 		</properties>
 	</rule>

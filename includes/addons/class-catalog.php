@@ -7,20 +7,20 @@
  * decorates each row with local install / license state, and returns
  * a flat list of items in the shape the React layer consumes.
  *
- * This is the domain layer behind {@see \DuckDev\Loggedin\Api\Addons}
+ * This is the domain layer behind {@see \FoxeLabs\Loggedin\Api\Addons}
  * — the REST controller stays a thin HTTP wrapper, mirroring the
  * pattern the 404-to-301 plugin uses. Keeping it here (rather than
  * in the controller) means the same catalogue can feed WP-CLI or
  * tests without going through a `WP_REST_Request`.
  *
- * @package DuckDev\Loggedin\Addons
+ * @package FoxeLabs\Loggedin\Addons
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Addons;
+namespace FoxeLabs\Loggedin\Addons;
 
-use DuckDev\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Contracts\Singleton;
 
 defined( 'WPINC' ) || die;
 

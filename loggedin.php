@@ -11,18 +11,18 @@
  * session guard, admin UI, REST API, Freemius) lives behind its own
  * class under `includes/` and registers its own hooks from there.
  *
- * @package           DuckDev\Loggedin
+ * @package           FoxeLabs\Loggedin
  * @author            Joel James
  * @copyright         2025 Joel James
  * @license           GPL-2.0+
  *
  * @wordpress-plugin
  * Plugin Name:       Loggedin - Session Manager, Limit Concurrent Logins & Force Logout
- * Plugin URI:        https://duckdev.com/products/loggedin-limit-active-logins/
+ * Plugin URI:        https://foxelabs.com/software/plugins/loggedin
  * Description:       Limit an account to a specific number of simultaneous logins across all devices.
- * Version:           3.1.0
+ * Version:           3.2.0
  * Author:            Joel James
- * Author URI:        https://duckdev.com/
+ * Author URI:        https://foxelabs.com/
  * Donate link:       https://paypal.me/JoelCJ
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -32,7 +32,7 @@
  * Requires at least: 6.0
  */
 
-namespace DuckDev\Loggedin;
+namespace FoxeLabs\Loggedin;
 
 defined( 'WPINC' ) || die;
 
@@ -84,7 +84,40 @@ if ( ! function_exists( __NAMESPACE__ . '\\init' ) ) {
 
 		require __DIR__ . '/vendor/autoload.php';
 
+		alias_legacy_classes();
+
 		Core::instance();
+	}
+}
+
+if ( ! function_exists( __NAMESPACE__ . '\\alias_legacy_classes' ) ) {
+	/**
+	 * Keep the pre-3.2.0 `DuckDev\Loggedin` class names resolvable.
+	 *
+	 * The namespace moved to `FoxeLabs\Loggedin` with the Duck Dev to
+	 * Foxe Labs rebrand. Add-ons are separate plugins that WordPress
+	 * updates independently, so a site can — and often will — run the
+	 * new parent alongside an add-on built against the old names.
+	 *
+	 * `Plugin` is the only parent class add-ons reference across the
+	 * boundary: each one guards its boot with
+	 * `class_exists( '\DuckDev\Loggedin\Plugin' )`, and Active Sessions
+	 * also imports it. Without the alias that guard reports false and
+	 * every add-on silently disables itself. Everything else crossing
+	 * the boundary is a `loggedin_`-prefixed hook, and those names did
+	 * not change.
+	 *
+	 * Safe to drop once all four add-ons have shipped a release built
+	 * against `FoxeLabs\Loggedin` and had time to roll out.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @return void
+	 */
+	function alias_legacy_classes(): void {
+		if ( ! class_exists( '\\DuckDev\\Loggedin\\Plugin', false ) ) {
+			class_alias( Plugin::class, '\\DuckDev\\Loggedin\\Plugin' );
+		}
 	}
 }
 

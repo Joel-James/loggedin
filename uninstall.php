@@ -15,7 +15,7 @@
  * is core WordPress data, not ours; nuking it would log every user
  * out unnecessarily.
  *
- * @package DuckDev\Loggedin
+ * @package FoxeLabs\Loggedin
  */
 
 // `WP_UNINSTALL_PLUGIN` is set by core only when this file is invoked

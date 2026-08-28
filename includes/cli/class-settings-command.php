@@ -2,7 +2,7 @@
 /**
  * `wp loggedin settings` commands.
  *
- * Thin CLI layer over {@see \DuckDev\Loggedin\Setup\Settings}. Every
+ * Thin CLI layer over {@see \FoxeLabs\Loggedin\Setup\Settings}. Every
  * write goes through `Settings::update()`, which means the CLI shares
  * the exact same sanitizer as the REST route and a direct
  * `update_option()` call — there is no second validation path to keep
@@ -13,14 +13,14 @@
  * `loggedin_settings_defaults` filter is readable and writable here
  * without touching this class.
  *
- * @package DuckDev\Loggedin\Cli
+ * @package FoxeLabs\Loggedin\Cli
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Cli;
+namespace FoxeLabs\Loggedin\Cli;
 
-use DuckDev\Loggedin\Setup\Settings;
+use FoxeLabs\Loggedin\Setup\Settings;
 use WP_CLI;
 use WP_CLI\Formatter;
 

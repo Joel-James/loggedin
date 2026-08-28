@@ -17,12 +17,12 @@
  *   - Tests can call `MyClass::instance()` repeatedly without having
  *     to thread instances around through fixtures.
  *
- * @package DuckDev\Loggedin\Contracts
+ * @package FoxeLabs\Loggedin\Contracts
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Contracts;
+namespace FoxeLabs\Loggedin\Contracts;
 
 defined( 'WPINC' ) || die;
 
@@ -71,7 +71,7 @@ trait Singleton {
 	 * Implementations should register WordPress action / filter
 	 * callbacks here, not perform expensive work. The method runs at
 	 * the moment the singleton is first requested — usually inside
-	 * the phased boot in {@see \DuckDev\Loggedin\Core::init()}.
+	 * the phased boot in {@see \FoxeLabs\Loggedin\Core::init()}.
 	 */
 	abstract protected function init(): void;
 

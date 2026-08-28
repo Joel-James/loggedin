@@ -3,7 +3,7 @@
  *
  * WordPress echoes `admin_notices` output above `.wrap` on the page, so
  * by the time our React app mounts, any notice (including the wp.org
- * review prompt from `duckdev/wp-review-notice`) sits above the plugin
+ * review prompt from `foxelabs/wp-review-notice`) sits above the plugin
  * header instead of between the header and the settings panels.
  *
  * On mount we relocate every WP-style notice that lives inside

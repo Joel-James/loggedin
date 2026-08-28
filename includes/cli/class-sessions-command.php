@@ -10,12 +10,12 @@
  * report is the job of the Active Sessions add-on, which owns the
  * cross-user queries and the pagination that comes with them.
  *
- * @package DuckDev\Loggedin\Cli
+ * @package FoxeLabs\Loggedin\Cli
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Cli;
+namespace FoxeLabs\Loggedin\Cli;
 
 use WP_CLI;
 use WP_CLI\Fetchers\User as User_Fetcher;

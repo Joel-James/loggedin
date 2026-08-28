@@ -18,15 +18,15 @@
  * mode, and both honour the `loggedin_bypass` filter so an addon can
  * exempt a specific user or role without forking this class.
  *
- * @package DuckDev\Loggedin\Front
+ * @package FoxeLabs\Loggedin\Front
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Front;
+namespace FoxeLabs\Loggedin\Front;
 
-use DuckDev\Loggedin\Contracts\Singleton;
-use DuckDev\Loggedin\Setup\Settings;
+use FoxeLabs\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Setup\Settings;
 use WP_Error;
 use WP_Session_Tokens;
 

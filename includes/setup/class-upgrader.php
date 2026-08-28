@@ -13,15 +13,15 @@
  * we don't have to dig through the main settings array to detect a
  * version change.
  *
- * @package DuckDev\Loggedin\Setup
+ * @package FoxeLabs\Loggedin\Setup
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Setup;
+namespace FoxeLabs\Loggedin\Setup;
 
-use DuckDev\Loggedin\Contracts\Singleton;
-use DuckDev\Loggedin\Plugin;
+use FoxeLabs\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Plugin;
 use FoxeLabs\Freemius\Storage\ActivationRepository;
 
 defined( 'WPINC' ) || die;
@@ -73,7 +73,7 @@ final class Upgrader {
 		$this->migrate_legacy_options();
 
 		// Move the pre-library review-notice state onto the keys
-		// `duckdev/wp-review-notice` expects.
+		// `foxelabs/wp-review-notice` expects.
 		$this->migrate_review_notice_keys();
 
 		// Move license activations onto the key the rebranded
@@ -93,7 +93,7 @@ final class Upgrader {
 	 *   - user meta `loggedin_rating_notice_dismissed` — `1` when the
 	 *     user clicked "No thanks".
 	 *
-	 * The `duckdev/wp-review-notice` library uses the same shapes
+	 * The `foxelabs/wp-review-notice` library uses the same shapes
 	 * under different names (`loggedin_review_time`,
 	 * `loggedin_review_dismissed`), so a straight rename preserves
 	 * every user's decision.

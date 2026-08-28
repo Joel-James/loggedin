@@ -20,15 +20,15 @@
  * `/wp/v2/settings` and lets the React Settings tab read/write it
  * via `@wordpress/core-data`'s `useEntityProp`.
  *
- * @package DuckDev\Loggedin\Setup
+ * @package FoxeLabs\Loggedin\Setup
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Setup;
+namespace FoxeLabs\Loggedin\Setup;
 
-use DuckDev\Loggedin\Contracts\Singleton;
-use DuckDev\Loggedin\Plugin;
+use FoxeLabs\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Plugin;
 
 defined( 'WPINC' ) || die;
 

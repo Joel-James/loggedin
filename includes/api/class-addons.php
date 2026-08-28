@@ -16,19 +16,19 @@
  * field on every catalogue row.
  *
  * The controller is a thin HTTP wrapper; all domain logic lives in
- * {@see \DuckDev\Loggedin\Addons\Catalog} and
- * {@see \DuckDev\Loggedin\Addons\Addons}.
+ * {@see \FoxeLabs\Loggedin\Addons\Catalog} and
+ * {@see \FoxeLabs\Loggedin\Addons\Addons}.
  *
- * @package DuckDev\Loggedin\Api
+ * @package FoxeLabs\Loggedin\Api
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Api;
+namespace FoxeLabs\Loggedin\Api;
 
-use DuckDev\Loggedin\Addons\Addons as Addons_Module;
-use DuckDev\Loggedin\Addons\Catalog;
-use DuckDev\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Addons\Addons as Addons_Module;
+use FoxeLabs\Loggedin\Addons\Catalog;
+use FoxeLabs\Loggedin\Contracts\Singleton;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;

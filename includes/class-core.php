@@ -23,24 +23,24 @@
  * The `loggedin_init` action fires once boot completes so add-ons can
  * register their own modules with the same lifecycle.
  *
- * @package DuckDev\Loggedin
+ * @package FoxeLabs\Loggedin
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin;
+namespace FoxeLabs\Loggedin;
 
-use DuckDev\Loggedin\Addons\Addons;
-use DuckDev\Loggedin\Admin\Admin;
-use DuckDev\Loggedin\Admin\Assets;
-use DuckDev\Loggedin\Api\Addons as Addons_Api;
-use DuckDev\Loggedin\Api\Sessions as Sessions_Api;
-use DuckDev\Loggedin\Api\Settings as Settings_Api;
-use DuckDev\Loggedin\Cli\Commands;
-use DuckDev\Loggedin\Contracts\Singleton;
-use DuckDev\Loggedin\Front\Session_Guard;
-use DuckDev\Loggedin\Setup\Settings;
-use DuckDev\Loggedin\Setup\Upgrader;
+use FoxeLabs\Loggedin\Addons\Addons;
+use FoxeLabs\Loggedin\Admin\Admin;
+use FoxeLabs\Loggedin\Admin\Assets;
+use FoxeLabs\Loggedin\Api\Addons as Addons_Api;
+use FoxeLabs\Loggedin\Api\Sessions as Sessions_Api;
+use FoxeLabs\Loggedin\Api\Settings as Settings_Api;
+use FoxeLabs\Loggedin\Cli\Commands;
+use FoxeLabs\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Front\Session_Guard;
+use FoxeLabs\Loggedin\Setup\Settings;
+use FoxeLabs\Loggedin\Setup\Upgrader;
 
 defined( 'WPINC' ) || die;
 

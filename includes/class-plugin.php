@@ -13,12 +13,12 @@
  *     final and has no state, so it's safe to call from any context
  *     (REST request, CLI, cron).
  *
- * @package DuckDev\Loggedin
+ * @package FoxeLabs\Loggedin
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin;
+namespace FoxeLabs\Loggedin;
 
 defined( 'WPINC' ) || die;
 
@@ -39,7 +39,7 @@ final class Plugin {
 	 *
 	 * @since 3.0.0
 	 */
-	public const VERSION = '3.1.0';
+	public const VERSION = '3.2.0';
 
 	/**
 	 * Plugin slug used in menu URLs, asset handles and CSS classes.

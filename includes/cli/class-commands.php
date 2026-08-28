@@ -3,7 +3,7 @@
  * WP-CLI command registrar.
  *
  * Boots the `wp loggedin ...` command tree. Loaded from
- * {@see \DuckDev\Loggedin\Core::cli()}, which only runs the module when
+ * {@see \FoxeLabs\Loggedin\Core::cli()}, which only runs the module when
  * the request is actually a WP-CLI one — so nothing in this directory
  * is ever touched on a web request.
  *
@@ -12,14 +12,14 @@
  * the constructor contract ours (no implicit `new` by the framework)
  * and mirrors how the rest of the plugin hands modules around.
  *
- * @package DuckDev\Loggedin\Cli
+ * @package FoxeLabs\Loggedin\Cli
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Cli;
+namespace FoxeLabs\Loggedin\Cli;
 
-use DuckDev\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Contracts\Singleton;
 use WP_CLI;
 
 defined( 'WPINC' ) || die;

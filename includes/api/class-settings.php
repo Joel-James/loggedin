@@ -13,18 +13,18 @@
  *   - CLI / cURL recipes in our docs.
  *
  * The route mirrors the schema declared in
- * {@see \DuckDev\Loggedin\Setup\Settings::register()} so both entry
+ * {@see \FoxeLabs\Loggedin\Setup\Settings::register()} so both entry
  * points behave identically.
  *
- * @package DuckDev\Loggedin\Api
+ * @package FoxeLabs\Loggedin\Api
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Api;
+namespace FoxeLabs\Loggedin\Api;
 
-use DuckDev\Loggedin\Contracts\Singleton;
-use DuckDev\Loggedin\Setup\Settings as Settings_Store;
+use FoxeLabs\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Setup\Settings as Settings_Store;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;

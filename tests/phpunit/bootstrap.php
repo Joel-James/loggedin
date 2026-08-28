@@ -7,7 +7,7 @@
  *    once to install the WordPress test scaffolding under /tmp/.
  *  - Run `composer install` so the Yoast PHPUnit polyfills are present.
  *
- * @package DuckDev\Loggedin
+ * @package FoxeLabs\Loggedin
  */
 
 declare( strict_types = 1 );

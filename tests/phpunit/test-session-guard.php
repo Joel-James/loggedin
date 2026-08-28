@@ -1,18 +1,18 @@
 <?php
 /**
- * Tests for {@see \DuckDev\Loggedin\Front\Session_Guard}.
+ * Tests for {@see \FoxeLabs\Loggedin\Front\Session_Guard}.
  *
  * Covers the three behavior modes — block, logout_oldest, allow — and
  * the `loggedin_bypass` filter that exempts specific users.
  *
- * @package DuckDev\Loggedin
+ * @package FoxeLabs\Loggedin
  */
 
 declare( strict_types = 1 );
 
-use DuckDev\Loggedin\Front\Session_Guard;
-use DuckDev\Loggedin\Plugin;
-use DuckDev\Loggedin\Setup\Settings;
+use FoxeLabs\Loggedin\Front\Session_Guard;
+use FoxeLabs\Loggedin\Plugin;
+use FoxeLabs\Loggedin\Setup\Settings;
 
 /**
  * @group session-guard

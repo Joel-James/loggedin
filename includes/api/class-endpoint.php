@@ -10,14 +10,14 @@
  *
  * Per-route argument schemas and callbacks live in each subclass.
  *
- * @package DuckDev\Loggedin\Api
+ * @package FoxeLabs\Loggedin\Api
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Api;
+namespace FoxeLabs\Loggedin\Api;
 
-use DuckDev\Loggedin\Plugin;
+use FoxeLabs\Loggedin\Plugin;
 use WP_REST_Request;
 
 defined( 'WPINC' ) || die;

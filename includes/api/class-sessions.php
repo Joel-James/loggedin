@@ -16,14 +16,14 @@
  * React side a single text input with a hint, rather than a select
  * + value pair.
  *
- * @package DuckDev\Loggedin\Api
+ * @package FoxeLabs\Loggedin\Api
  */
 
 declare( strict_types = 1 );
 
-namespace DuckDev\Loggedin\Api;
+namespace FoxeLabs\Loggedin\Api;
 
-use DuckDev\Loggedin\Contracts\Singleton;
+use FoxeLabs\Loggedin\Contracts\Singleton;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;

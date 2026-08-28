@@ -25,10 +25,10 @@ Loggedin manages the login sessions your users hold and gives you the tools to e
 
 | Addon | Description |
 | --- | --- |
-| [Active Sessions](https://duckdev.com/addon/loggedin-active-sessions/) | Browse every user with a live session, drill into each device, and sign out one session — or all of them — in one click. |
-| [Limit Per User](https://duckdev.com/addon/limit-per-user/) | Override the global cap for individual users. |
-| [Limit Per Role](https://duckdev.com/addon/limit-per-role/) | Set custom caps per WordPress role; highest applicable wins. |
-| [Real-time Logout](https://duckdev.com/addon/real-time-logout/) | Detect background-terminated sessions and log the user out immediately. |
+| [Active Sessions](https://foxelabs.com/software/plugins/loggedin/active-sessions) | Browse every user with a live session, drill into each device, and sign out one session — or all of them — in one click. |
+| [Limit Per User](https://foxelabs.com/software/plugins/loggedin/limit-per-user) | Override the global cap for individual users. |
+| [Limit Per Role](https://foxelabs.com/software/plugins/loggedin/limit-per-role) | Set custom caps per WordPress role; highest applicable wins. |
+| [Real-time Logout](https://foxelabs.com/software/plugins/loggedin/realtime-logout) | Detect background-terminated sessions and log the user out immediately. |
 
 ## Requirements
 

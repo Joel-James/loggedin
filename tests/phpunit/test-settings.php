@@ -1,14 +1,14 @@
 <?php
 /**
- * Tests for {@see \DuckDev\Loggedin\Setup\Settings}.
+ * Tests for {@see \FoxeLabs\Loggedin\Setup\Settings}.
  *
- * @package DuckDev\Loggedin
+ * @package FoxeLabs\Loggedin
  */
 
 declare( strict_types = 1 );
 
-use DuckDev\Loggedin\Plugin;
-use DuckDev\Loggedin\Setup\Settings;
+use FoxeLabs\Loggedin\Plugin;
+use FoxeLabs\Loggedin\Setup\Settings;
 
 /**
  * @group settings

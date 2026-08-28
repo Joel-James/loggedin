@@ -20,7 +20,7 @@ import { Button, Flex, FlexItem, PanelBody } from '@wordpress/components';
  */
 const SUPPORT_LINKS = [
 	{
-		href: 'https://docs.duckdev.com/loggedin/',
+		href: 'https://docs.foxelabs.com/software/loggedin/',
 		icon: 'admin-page',
 		label: __( 'Documentation', 'loggedin' ),
 	},
@@ -30,7 +30,7 @@ const SUPPORT_LINKS = [
 		label: __( 'Support Forums', 'loggedin' ),
 	},
 	{
-		href: 'https://duckdev.com/contact/',
+		href: 'https://foxelabs.com/contact',
 		icon: 'superhero',
 		label: __( 'Priority Support', 'loggedin' ),
 	},
@@ -43,7 +43,7 @@ const SUPPORT_LINKS = [
  */
 const AUTHOR_LINKS = [
 	{
-		href: 'https://duckdev.com/about/',
+		href: 'https://foxelabs.com/about',
 		icon: 'admin-site',
 		label: __( 'About Us', 'loggedin' ),
 	},
