@@ -35,8 +35,7 @@ import { store as noticesStore } from '@wordpress/notices';
  *
  * The CTA is an inline text link in the body copy rather than the
  * Notice `actions` button: the button forces the banner to a taller
- * two-row layout, so a plain link keeps the notice compact. Matches
- * the 404 to 301 plugin's cross-sell design.
+ * two-row layout, so a plain link keeps the notice compact.
  *
  * The Notice is non-dismissible: a dismissible CTA would persist its
  * dismissed state in component memory only (no server round-trip), so

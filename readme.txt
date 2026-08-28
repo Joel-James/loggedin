@@ -213,13 +213,13 @@ See the [developer docs](https://docs.foxelabs.com/software/loggedin/developer-d
 = 3.0.2 =
 * New: Review-request notice restored, powered by the `duckdev/wp-review-notice` library and scoped to the Loggedin settings screen with a 7-day delay.
 * Improve: Legacy review-notice state migrated to the new storage keys so users who already dismissed the prompt stay dismissed.
-* Improve: Admin notices now render inside the plugin's centered page column instead of above the header, matching the 404 to 301 shell.
+* Improve: Admin notices now render inside the plugin's centered page column instead of above the header.
 * Fix: Left-hand gap between the plugin header and the admin sidebar caused by WordPress's default `#wpcontent` padding.
 
 = 3.0.1 =
 * New: `loggedin.admin.tabs` JS filter — addons can register their own React component as a tab in the Loggedin admin nav, with optional `before` / `after` positioning hints. Powers the new Active Sessions addon.
 * New: Cross-sell banner on the Force Logout panel routed through `loggedin.settings.force_logout.cross_sell` so addons can hide or replace it once installed.
-* Improve: Addon card layout aligned with the 404 to 301 plugin — primary CTA pinned to the left of the footer, "More details" link on the right, title-cased license button labels.
+* Improve: Addon card layout reworked — primary CTA pinned to the left of the footer, "More details" link on the right, title-cased license button labels.
 * Fix: The v2 → v3 settings migration never ran on existing installs, leaving legacy option keys in place after the upgrade.
 
 = 3.0.0 =

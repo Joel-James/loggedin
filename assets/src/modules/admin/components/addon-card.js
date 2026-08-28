@@ -11,8 +11,7 @@
  *   3. A description body — the flex grower so the footer stays at
  *      a fixed height regardless of description length.
  *   4. A footer carrying the primary CTA on the left and a "More
- *      details" link on the right. Layout matches the 404-to-301
- *      plugin's addon cards so the two products feel like siblings.
+ *      details" link on the right.
  *
  * License management lives in a sibling modal — clicking
  * "Manage License" fires `onManageLicense(addon)` so the modal can
@@ -126,7 +125,7 @@ const AddonCard = ( { addon, onManageLicense } ) => {
 				 * Explicit Flex wrapper so the slot order is locked
 				 * regardless of `CardFooter`'s default justify. The
 				 * primary CTA pins left, the "More details" link
-				 * pins right — same as the 404-to-301 addon cards.
+				 * pins right.
 				 */ }
 				<Flex justify="space-between" align="center">
 					<FlexItem>

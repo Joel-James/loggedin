@@ -8,10 +8,9 @@
  * a flat list of items in the shape the React layer consumes.
  *
  * This is the domain layer behind {@see \FoxeLabs\Loggedin\Api\Addons}
- * — the REST controller stays a thin HTTP wrapper, mirroring the
- * pattern the 404-to-301 plugin uses. Keeping it here (rather than
- * in the controller) means the same catalogue can feed WP-CLI or
- * tests without going through a `WP_REST_Request`.
+ * — the REST controller stays a thin HTTP wrapper. Keeping the
+ * catalogue here rather than in the controller means it can feed
+ * WP-CLI or tests without going through a `WP_REST_Request`.
  *
  * @package FoxeLabs\Loggedin\Addons
  */
