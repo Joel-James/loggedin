@@ -73,7 +73,7 @@ Extend Loggedin with these official [add-ons](https://foxelabs.com/software/plug
 
 ### 🐛 Bug reports
 
-Found a bug? File it on the [Loggedin GitHub repository](https://github.com/Joel-James/loggedin/issues).
+Found a bug? File it on the [Loggedin GitHub repository](https://github.com/joel-james/loggedin/issues).
 
 _GitHub is for bug reports and development-related issues only. For end-user support, please use the WordPress.org [support forums](https://wordpress.org/support/plugin/loggedin/)._
 

@@ -4,7 +4,7 @@
   "description": "Limit an account to a specific number of simultaneous logins across all devices.",
   "main": "loggedin.php",
   "private": true,
-  "homepage": "https://github.com/Joel-James/loggedin/",
+  "homepage": "https://github.com/joel-james/loggedin/",
   "author": {
     "name": "Joel James",
     "url": "https://foxelabs.com"

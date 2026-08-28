@@ -5,7 +5,7 @@ A session manager for WordPress — limit concurrent logins, stop account sharin
 [![Plugin Version](https://img.shields.io/wordpress/plugin/v/loggedin.svg?style=flat-square)](https://wordpress.org/plugins/loggedin/)
 [![License](https://img.shields.io/badge/license-GPL_v2%2B-blue.svg?style=flat-square)](https://opensource.org/license/GPL-2.0)
 [![WordPress Tested](https://img.shields.io/wordpress/v/loggedin.svg?style=flat-square)](https://wordpress.org/plugins/loggedin/)
-[![Build Status](https://img.shields.io/badge/tests-passing-brightgreen.svg?style=flat-square)](https://github.com/Joel-James/loggedin/actions)
+[![Build Status](https://img.shields.io/badge/tests-passing-brightgreen.svg?style=flat-square)](https://github.com/joel-james/loggedin/actions)
 
 Loggedin manages the login sessions your users hold and gives you the tools to end them. Its core job is enforcing a per-account session limit across every device a user signs in from: when the limit is hit, you choose what happens next — block the new login, or kick the oldest session out so the new device can take its place.
 

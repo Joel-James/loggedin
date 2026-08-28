@@ -1,8 +1,8 @@
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://github.com/Joel-James/loggedin/actions)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://github.com/joel-james/loggedin/actions)
 
 # Contributing to Loggedin
 
-Code contributions, bug reports, and feedback are very welcome. These should be submitted through [the GitHub repository](https://github.com/Joel-James/loggedin).
+Code contributions, bug reports, and feedback are very welcome. These should be submitted through [the GitHub repository](https://github.com/joel-james/loggedin).
 
 Development happens in the `dev` branch, and any pull requests should be made against that branch please.
 
