@@ -30,6 +30,17 @@ Loggedin manages the login sessions your users hold and gives you the tools to e
 | [Limit Per Role](https://foxelabs.com/software/plugins/loggedin/limit-per-role) | Set custom caps per WordPress role; highest applicable wins. |
 | [Real-time Logout](https://foxelabs.com/software/plugins/loggedin/realtime-logout) | Detect background-terminated sessions and log the user out immediately. |
 
+## Documentation
+
+Full documentation lives at [docs.foxelabs.com](https://docs.foxelabs.com/software/loggedin/getting-started):
+
+- [Getting started](https://docs.foxelabs.com/software/loggedin/getting-started)
+- [General settings](https://docs.foxelabs.com/software/loggedin/general-settings)
+- [Force Logout (Manage Sessions)](https://docs.foxelabs.com/software/loggedin/force-logout)
+- [WP-CLI commands](https://docs.foxelabs.com/software/loggedin/wp-cli)
+- [Developer docs — hooks, filters, REST](https://docs.foxelabs.com/software/loggedin/developer-docs)
+- [Changelog](https://docs.foxelabs.com/software/loggedin/changelog)
+
 ## Requirements
 
 - PHP **7.4+**
@@ -93,6 +104,11 @@ composer run phpcs       # WPCS lint
 PHP code follows WordPress Coding Standards (see `phpcs.xml.dist`). JS uses `@wordpress/scripts` defaults.
 
 ## Extending
+
+Plugin classes live under the `FoxeLabs\Loggedin\` namespace. It was
+`DuckDev\Loggedin\` before 3.2.0; `DuckDev\Loggedin\Plugin` is kept as an
+alias so existing add-ons keep booting, but new code should use the current
+name.
 
 Addons register themselves via two hooks wired at file load:
 
