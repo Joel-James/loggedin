@@ -64,24 +64,19 @@ if ( ! function_exists( __NAMESPACE__ . '\\init' ) ) {
 	 * dev clone) can't redefine the function and silently shadow the
 	 * first init call. The function:
 	 *
-	 *   1. Loads the plugin text domain so any string surfaced during
-	 *      boot (e.g. an admin notice from the upgrader) is already
-	 *      translatable.
-	 *   2. Pulls in the Composer autoloader.
-	 *   3. Hands off to {@see Core::instance()}, which is responsible
+	 *   1. Pulls in the Composer autoloader.
+	 *   2. Hands off to {@see Core::instance()}, which is responsible
 	 *      for wiring every module in order.
+	 *
+	 * The text domain is not loaded here: since WordPress 4.6 core
+	 * loads translations for a wordpress.org-hosted plugin on first
+	 * use, keyed on the `Text Domain` header.
 	 *
 	 * @since 2.0.0
 	 *
 	 * @return void
 	 */
 	function init(): void {
-		load_plugin_textdomain(
-			'loggedin',
-			false,
-			dirname( plugin_basename( __FILE__ ) ) . '/languages/'
-		);
-
 		require __DIR__ . '/vendor/autoload.php';
 
 		alias_legacy_classes();

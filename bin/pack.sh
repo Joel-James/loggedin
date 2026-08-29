@@ -133,6 +133,12 @@ done
 # Strip OS noise that may have crept into the staged copy.
 find "$plugin_stage" -name '.DS_Store' -delete
 
+# Drop compiled/source translation catalogues. The plugin no longer calls
+# `load_plugin_textdomain()`, so WordPress loads language packs from
+# wp-content/languages/plugins/ and a bundled .mo would never be read.
+# The .pot stays — it documents the string set for translators.
+find "$plugin_stage/languages" -type f \( -name '*.mo' -o -name '*.po' \) -delete 2>/dev/null || true
+
 # Prune dev junk from each vendor package. Conservative list — LICENSE,
 # composer.json, README and anything under src/ stays. Removes CI
 # configs, test fixtures, dev-tool configs and editor metadata that have
