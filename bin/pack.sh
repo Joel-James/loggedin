@@ -19,11 +19,14 @@ PKG_FILE="$ROOT/package.json"
 DIST_DIR="$ROOT/releases"
 
 # Files/folders that land inside the ZIP. Anything not listed here is excluded.
+# composer.json ships alongside vendor/ so the bundled dependencies are
+# attributable — Plugin Check flags a vendor tree without it.
 INCLUDES=(
 	"$SLUG.php"
 	"uninstall.php"
 	"readme.txt"
 	"license"
+	"composer.json"
 	"includes"
 	"languages"
 	"build"
