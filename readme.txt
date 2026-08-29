@@ -199,6 +199,7 @@ See the [developer docs](https://docs.foxelabs.com/software/loggedin/developer-d
 * Improve: Faster settings reads — the plugin's settings are now built once per request instead of on every read, cutting repeat work on each login and admin page load.
 * Improve: Loggedin is now published under the Foxe Labs brand. Nothing about how the plugin works has changed.
 * Improve: Updated every link in the plugin to the new foxelabs.com product pages and docs.foxelabs.com documentation.
+* Improve: Removed the leftover Loggedin section on Settings → General. It only pointed at the real settings page and has been redundant since 2.0 — settings live under Users → Loggedin.
 * Compat: Tested with WordPress 7.1.
 
 = 3.1.0 =
