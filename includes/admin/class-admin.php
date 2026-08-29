@@ -7,9 +7,6 @@
  *
  *   - Registering the menu item under Users → Loggedin and emitting
  *     the React mount point div.
- *   - The legacy section on Settings → General that deep-links to
- *     the new admin page (kept for users who bookmarked the old
- *     location).
  *   - The "force logout this user from all devices" action handler
  *     (link rendered by addon code or admin pages outside this
  *     plugin).
@@ -51,7 +48,6 @@ final class Admin {
 	 */
 	protected function init(): void {
 		add_action( 'admin_menu', array( $this, 'register_menu' ) );
-		add_action( 'admin_init', array( $this, 'old_options_page' ) );
 		add_action( 'admin_init', array( $this, 'force_logout' ) );
 
 		Review_Notice::create(
@@ -157,50 +153,5 @@ final class Admin {
 	 */
 	public function render_page(): void {
 		echo '<div id="loggedin-admin" class="loggedin-wrap"></div>';
-	}
-
-	/**
-	 * Add a deprecation section on Settings → General.
-	 *
-	 * Pre-2.0 versions registered the plugin's options on the core
-	 * General screen. Users who still navigate there see a one-line
-	 * pointer to the new location instead of a broken / empty
-	 * section.
-	 *
-	 * @since 2.0.0
-	 * @deprecated 2.0.0 Kept only as a navigation aid.
-	 *
-	 * @return void
-	 */
-	public function old_options_page(): void {
-		add_settings_section(
-			'loggedin_settings',
-			// translators: %s lock icon.
-			sprintf( __( '%s Loggedin Settings', 'loggedin' ), '<span class="dashicons dashicons-lock"></span>' ),
-			array( $this, 'loggedin_old_settings' ),
-			'general'
-		);
-	}
-
-	/**
-	 * Render the deep-link pointer body.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return void
-	 */
-	public function loggedin_old_settings(): void {
-		?>
-		<p class="description">
-			<?php
-			printf(
-				// translators: %1$s opening anchor, %2$s closing anchor.
-				esc_attr__( 'Loggedin settings have been relocated. %1$sClick here%2$s to access the new settings page.', 'loggedin' ),
-				'<a href="' . esc_url( admin_url( 'users.php?page=' . Plugin::SLUG ) ) . '">',
-				'</a>'
-			);
-			?>
-		</p>
-		<?php
 	}
 }
