@@ -26,6 +26,7 @@ Loggedin manages the login sessions your users hold and gives you the tools to e
 | Addon | Description |
 | --- | --- |
 | [Active Sessions](https://foxelabs.com/software/plugins/loggedin/active-sessions) | Browse every user with a live session, drill into each device, and sign out one session — or all of them — in one click. |
+| [Auto Logout](https://foxelabs.com/software/plugins/loggedin/auto-logout) | Sign users out after a set period of inactivity, with an optional warning before the session ends. |
 | [Limit Per User](https://foxelabs.com/software/plugins/loggedin/limit-per-user) | Override the global cap for individual users. |
 | [Limit Per Role](https://foxelabs.com/software/plugins/loggedin/limit-per-role) | Set custom caps per WordPress role; highest applicable wins. |
 | [Real-time Logout](https://foxelabs.com/software/plugins/loggedin/realtime-logout) | Detect background-terminated sessions and log the user out immediately. |

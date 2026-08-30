@@ -58,6 +58,7 @@ There's a one-click **Force Logout** panel in the admin to clear every session f
 Extend Loggedin with these official [add-ons](https://foxelabs.com/software/plugins/loggedin):
 
 * **[Active Sessions](https://foxelabs.com/software/plugins/loggedin/active-sessions)** — See exactly who's signed in right now, drill into each device per user, and sign out a single session — or every session — in one click.
+* **[Auto Logout](https://foxelabs.com/software/plugins/loggedin/auto-logout)** — Sign users out automatically after a period of inactivity. Set an idle timeout, warn users before the session ends, and keep unattended machines from staying signed in.
 * **[Limit Per User](https://foxelabs.com/software/plugins/loggedin/limit-per-user)** — Override the global session cap for an individual user account directly from their WordPress profile. Perfect for tiered access or trusted-staff exemptions.
 * **[Limit Per Role](https://foxelabs.com/software/plugins/loggedin/limit-per-role)** — Set a different concurrent-session cap per WordPress role. Give administrators more headroom while keeping subscribers tight, or vice versa.
 * **[Real-time Logout](https://foxelabs.com/software/plugins/loggedin/realtime-logout)** — Detect logouts in near-real-time. When Loggedin terminates a session, the user's other open tabs reload to wp-login automatically — no waiting for the next page click.
@@ -95,7 +96,7 @@ It manages the sessions WordPress already creates, rather than replacing WordPre
 * **Force logout** every session for any user, from the admin or from WP-CLI.
 * **Inspect** a user's active sessions — login time, expiry, IP and device — via `wp loggedin sessions list`.
 
-For a live, sortable view of every signed-in user across the site, with per-device detail and one-click sign-out, add the [Active Sessions](https://foxelabs.com/software/plugins/loggedin/active-sessions) add-on. Idle timeouts and login alerts are on the roadmap as add-ons too.
+For a live, sortable view of every signed-in user across the site, with per-device detail and one-click sign-out, add the [Active Sessions](https://foxelabs.com/software/plugins/loggedin/active-sessions) add-on. To sign idle users out automatically, add the [Auto Logout](https://foxelabs.com/software/plugins/loggedin/auto-logout) add-on. Login alerts are on the roadmap as an add-on too.
 
 If all you need is to cap concurrent logins and stop account sharing, the free plugin does that on its own — no add-on required.
 
@@ -114,6 +115,10 @@ Yes, with the official [Limit Per Role add-on](https://foxelabs.com/software/plu
 = Can I set a different limit for one specific user? =
 
 Yes, with the official [Limit Per User add-on](https://foxelabs.com/software/plugins/loggedin/limit-per-user). It adds a field to the WordPress profile screen so you can override the global cap on a per-user basis — useful for shared editorial accounts, executive users, or anyone who legitimately needs more sessions than your default.
+
+= Can I log users out automatically after they go idle? =
+
+Yes, with the official [Auto Logout add-on](https://foxelabs.com/software/plugins/loggedin/auto-logout). Set an inactivity timeout and idle users are signed out on their own, with an optional warning shown before the session ends — useful for shared workstations and anywhere an unattended browser shouldn't stay signed in.
 
 = Will current users be logged out when I install or change the limit? =
 
